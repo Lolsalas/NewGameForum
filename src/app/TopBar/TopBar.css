@@ -1,0 +1,21 @@
+.TopBar{
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(57, 53, 53);
+}
+
+.TopBar .TopLink{
+    padding-right: 5px
+}
+.TopBar .TopImage{
+    padding-left: 100px ;
+}
+
+input{
+    width: 300px;
+}
+

@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #cfc6c6;
-    --foreground: #e0d2d2;
+    --background: #ffffff;
+    --foreground: #fff7f7;
   }
 }
 
@@ -23,4 +23,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+input{
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
 }

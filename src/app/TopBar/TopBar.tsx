@@ -1,13 +1,22 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import './TopBar.css'
 
 function TopBar(){
     return(
-        <div id='TopBar'>
-            <Image width='200' height='200' src='/unnamed.png' alt="Logo"></Image>
-            <button>Login</button>
-            <Link href=''>Log In</Link>
+        <div className='TopBar'>
+            <div className="TopImage">
+            <Image width='150' height='150' src='/unnamed.png' alt="Logo"></Image>
+            </div>
+            <div className="TopSearchBar">
+                <form action="">
+                    <input type="text"/>
+                </form>
+            </div>
+            <div className="TopLink">
+                <Link href=''>Log In</Link>
+            </div>
         </div>
     )
 }
