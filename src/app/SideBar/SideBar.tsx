@@ -36,7 +36,7 @@ function SideBar(){
           {drawerContent}
         </Drawer>
       ): (
-        <Drawer  open={open} onClose={toggleDrawer(false)} classes={{paper:'custom_drawer'}} ModalProps={{keepMounted:true}} variant="temporary" sx={{'& .MuiDrawer-paper':{backgroundColor: '#525252ff'}}}>
+        <Drawer  open={open} onClose={toggleDrawer(false)} classes={{paper:'custom_drawer'}} ModalProps={{keepMounted:true}} className="DrawerMobile" variant="temporary" sx={{'& .MuiDrawer-paper':{backgroundColor: '#525252ff'}}}>
           {drawerContent}
         </Drawer>
       )}
