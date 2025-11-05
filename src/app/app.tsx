@@ -1,5 +1,6 @@
 import SideBar from "./SideBar/SideBar";
 import TopBar from "./TopBar/TopBar";
+import MainMenuCard from "./MainMenuCard/MainMenuCard";
 
 function  App()
 {
