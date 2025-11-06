@@ -2,10 +2,10 @@
 
 import './MainMenuCard.css'
 
-function MainMenu()
+function MainMenuCard()
 {
     return (
-        <div className="MainMenu">
+        <div className="MainMenuCard">
             <div className="ForumTitle">
                 <h3>Forum Title</h3>
                 <p className="SubInfo">Posts <span>0</span> . Comments <span>0</span></p>
@@ -14,4 +14,4 @@ function MainMenu()
     )
 }
 
-export default MainMenu
+export default MainMenuCard

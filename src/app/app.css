@@ -1,0 +1,19 @@
+.Layout{
+    display: flex;
+}
+
+.RightArea{
+    flex:1;
+    display:flex;
+    flex-direction: column;
+}
+
+.ContentArea{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
