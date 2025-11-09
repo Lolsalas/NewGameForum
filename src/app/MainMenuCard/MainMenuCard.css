@@ -1,12 +1,13 @@
 .MainMenuCard {
-  background: #ffffff;
+  background: #ece9e9;
   border-radius: 8px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  width: 350px; /* o 100% */
+  width: 600px; 
+  height: 200px;
 }
 
 .ForumTitle{

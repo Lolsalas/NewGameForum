@@ -1,8 +1,13 @@
 .MainMenu{
     display: flex;
-    flex-direction: column;
+    flex-direction: wrap;
+    flex-wrap: wrap;
     gap: 20px;
     flex: 1;
     padding: 20px;
     margin: 0 auto;
+}
+
+.MainMenu > * {
+    flex: 1 1 calc(50% - 20px); /* 2 columnas */
 }

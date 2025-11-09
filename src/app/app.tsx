@@ -11,7 +11,6 @@ function  App()
         <div className="Layout">
             <SideBar></SideBar>
             <div className="RightArea">
-
                 <div className="MainContent">
                 <MainMenu></MainMenu>
                 </div>

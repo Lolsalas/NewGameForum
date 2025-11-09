@@ -9,6 +9,10 @@ function MainMenu()
             <MainMenuCard></MainMenuCard>
             <MainMenuCard></MainMenuCard>
             <MainMenuCard></MainMenuCard>
+            <MainMenuCard></MainMenuCard>
+            <MainMenuCard></MainMenuCard>
+            <MainMenuCard></MainMenuCard>
+            <MainMenuCard></MainMenuCard>
         </div>
     )
 }
