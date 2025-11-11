@@ -21,7 +21,7 @@ function Login(){
                     <input type="password" name="" id="" placeholder="Password"/>
                 </div>
                 <button className="LoginButton">Login</button>
-                <Link href='' className="LoginSignUp">Not a member? Sign Up!</Link>
+                <Link href='/CreateAccount' className="LoginSignUp">Not a member? Sign Up!</Link>
             </div>
             </div>
         </div>
