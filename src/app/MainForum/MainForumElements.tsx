@@ -13,15 +13,14 @@ export interface Threads
 function MainForumElements({id,title,author,date,replies}:Threads)
 {
     return(
-    <div>
+    <div className="MainForumElement">
     <div className="MainForumTitleRow">
         <h3 className="MainForumTitle">{title}</h3>
     </div>
     <div className="MainForumTitleMeta">
-        {author} {date}
-    </div>
-    <div className="MainForumTitleViews">
-        {replies}
+        <span className="MainForumInfo">{author}</span>
+        <span className="MainForumInfo">{date}</span>
+        <span className="MainForumInfo">{replies}</span>
     </div>
     </div>
     )
