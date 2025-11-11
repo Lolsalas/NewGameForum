@@ -17,7 +17,7 @@ function TopBar(){
                 </form>
             </div>
             <div className="TopLink">
-                <Link href='/MainForum'>Log In</Link>
+                <Link href='/CreatePost'>Log In</Link>
             </div>
         </div>
     )
