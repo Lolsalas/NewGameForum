@@ -1,0 +1,75 @@
+.Login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.LoginCard {
+    background: white;
+  width: 360px;
+  height:  450px;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 100px;
+  
+}
+
+
+.LoginCard h2 {
+  background: #727474;
+  color: white;
+  padding: 15px;
+  margin: -30px -30px 20px -30px;
+  border-radius: 8px 8px 0 0;
+}
+
+
+.LoginInput {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.LoginInput .icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #727474;
+  font-size: 14px;
+}
+
+.LoginInput input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.LoginInput input:focus {
+  border-color: #727474;
+}
+
+
+.LoginButton{
+  width: 100%;
+  padding: 12px;
+  background: #727474;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.LoginButton:hover {
+  background: #727474;
+}
+
+.LoginSignUp{
+    color: blue;
+}
