@@ -9,20 +9,21 @@ function CreateAccount()
             <div className="CreateAccount">
                 <SideBar></SideBar>
                 <div className="CreateAccountCard">
+                    <form action="http://localhost:8081/user" method="POST">
                     <h2>Create your account</h2>
-                    <label>Email</label>
+                    <label htmlFor="email">Email</label>
                     <div className="CreateAccountInput">
-                        <input type="email"/>
+                        <input type="email" name="Email" id="email"/>
                     </div>
-                    <label>Username</label>
-                    <input type="text"/>
-                    <label>Password</label>
-                    <input type="password"></input>
-                    <label htmlFor="">Confirm Password</label>
-                    <input type='password'></input>
+                    <label htmlFor="uname">Username</label>
+                    <input type="text" name="Username" id="uname"/>
+                    <label htmlFor="pword">Password</label>
+                    <input type="password" name="Password" id="pword"></input>
+                    {/* <label htmlFor="">Confirm Password</label>
+                    <input type='password'></input> */}
                     <button className="CreateAccountButton">Create</button>
+                    </form>
                 </div>
-
             </div>
         </div>
     )
