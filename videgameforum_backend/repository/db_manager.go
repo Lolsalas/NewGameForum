@@ -59,11 +59,20 @@ func (db *DBManager) Login(email, password string) (*models.User, error) {
 	return &user, nil
 }
 
-func (db *DBManager) CreatePost(post string) error {
-	var Post models.Post
+func (db *DBManager) CreatePost(post string, title string, userid int, forumid int) error {
+	Post := models.Post{Post_Title: title, Post_Text: post, Users_ID: userid, Forum_ID: forumid}
 	result := db.Orm.Create(&Post)
 	if result.Error != nil {
 		return result.Error
 	}
 	return nil
+}
+
+func (db *DBManager) GetUser(id int) (*models.User, error) {
+	var User models.User
+	result := db.Orm.First(&User, id)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &User, nil
 }

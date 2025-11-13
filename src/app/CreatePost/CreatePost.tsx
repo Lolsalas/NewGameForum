@@ -14,6 +14,8 @@ function CreatePost()
                 </div>
             <div className="CreatePostTextBox">
                 <form action="">
+                    <label>Title of your post: </label>
+                    <input type="text" placeholder="Write the title!"></input>
                     <textarea placeholder="Write your post here!"></textarea>
                     <button>Create Post</button>
                 </form>

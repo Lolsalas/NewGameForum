@@ -113,3 +113,31 @@ func (h *handler) GetForum(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{"forum": forum})
 }
+
+func (h *handler) GetCurrentUser(c *gin.Context) {
+	session, err := h.store.Get(c.Request, "session")
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "No se pudo obtener la sesion"})
+		return
+	}
+
+	auth, ok := session.Values["authenticated"].(bool)
+	if !ok || !auth {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "usuario no encontrado"})
+		return
+	}
+
+	userID, ok := session.Values["Users_id"].(int)
+	if !ok {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "usuario no encontrado en la sesion"})
+		return
+	}
+
+	user, err := h.db_manager.GetUser(userID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Usuario no encontrado"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"user": user})
+}
