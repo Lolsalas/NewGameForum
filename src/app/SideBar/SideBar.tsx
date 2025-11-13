@@ -20,7 +20,9 @@ function SideBar(){
     <List>
       <ListItemButton><ListItemText primary="Inicio" /></ListItemButton>
       <ListItemButton><ListItemText primary="Foros" /></ListItemButton>
-      <ListItemButton><ListItemText primary="Mi Perfil" /></ListItemButton>
+      <ListItemButton>
+        <Link href='/CreateForum'>Create a Forum</Link>
+        </ListItemButton>
     </List>
   )
   return(

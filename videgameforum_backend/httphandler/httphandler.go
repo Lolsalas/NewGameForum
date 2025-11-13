@@ -2,6 +2,7 @@ package httphandler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/Lolsalas/GameForum/models"
 	"github.com/Lolsalas/GameForum/repository"
@@ -46,16 +47,19 @@ func (h *handler) InsertUser(c *gin.Context) {
 
 func (h *handler) InsertForum(c *gin.Context) {
 	var new_forum models.Forum
-	if err := c.ShouldBind(&new_forum); err != nil {
+	if err := c.ShouldBindJSON(&new_forum); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	err := h.db_manager.InsertNewForum(new_forum.Forum_Name)
+	forum, err := h.db_manager.InsertNewForum(new_forum.Forum_Name)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusCreated, "forum created")
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "forum created",
+		"forum":   forum,
+	})
 }
 
 func (h *handler) GetUsers(c *gin.Context) {
@@ -96,4 +100,16 @@ func (h *handler) Login(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "Login successful"})
 
+}
+
+func (h *handler) GetForum(c *gin.Context) {
+	forumIdstr := c.Param("Forum_ID")
+	forumId, _ := strconv.Atoi(forumIdstr)
+
+	var forum models.Forum
+	if err := h.db_manager.Orm.Preload("Posts").First(&forum, forumId).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Foro no encontrado"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"forum": forum})
 }

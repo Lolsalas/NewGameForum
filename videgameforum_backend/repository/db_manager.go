@@ -29,13 +29,13 @@ func (db *DBManager) InsertNewUser(name string, password string, email string) e
 	return nil
 }
 
-func (db *DBManager) InsertNewForum(name string) error {
+func (db *DBManager) InsertNewForum(name string) (models.Forum, error) {
 	forum := models.Forum{Forum_Name: name}
 	result := db.Orm.Create(&forum)
 	if result.Error != nil {
-		return result.Error
+		return forum, result.Error
 	}
-	return nil
+	return forum, nil
 }
 
 func (db *DBManager) GetUsers() ([]models.User, error) {

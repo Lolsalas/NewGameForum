@@ -11,4 +11,5 @@ type Post struct {
 	Post_ID    int
 	Users_ID   int
 	Post_Title string
+	Forum_ID   int
 }
