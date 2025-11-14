@@ -5,9 +5,7 @@ import './CreateForum.css'
 function createforum()
 {
     return(
-        <BrowserRouter>
         <CreateForum></CreateForum>
-        </BrowserRouter>
     )
 
 }

@@ -4,23 +4,35 @@ import SideBar from "../SideBar/SideBar";
 import TopBar from "../TopBar/TopBar";
 import { useState } from "react";
 import {useNavigate} from 'react-router-dom'
+import { useRouter } from "next/navigation";
 
 function CreateForum()
 {
     const [Forum_Name,setForumname]=useState("")
-    const navigate=useNavigate()
+    const router=useRouter()
 
     const handleSubmit=async(e: React.FormEvent)=>{
         e.preventDefault();
-        const res = await fetch("http://localhost:8081/createforum", {
+
+        const authToken=localStorage.getItem('authToken')
+
+        if(!authToken)
+        {
+            console.error('Usuario no encontrado')
+            return
+        }
+
+        const res = await fetch(`/api/createforum`, {
             method:"POST",
             body:JSON.stringify({Forum_Name}),
-            headers:{"Content-Type":"application/json"}
+            headers:{"Content-Type":"application/json",
+                'Authorization':`Bearer ${authToken}`
+            },
         })
 
         const data=await res.json()
         if(res.ok){
-            navigate(`/MainForum/${data.forum.Forum_ID}`)
+            router.push(`/MainForum/${data.forum.Forum_ID}/CreatePost`)
         }
         else{
             console.log("Error: ",data.error)

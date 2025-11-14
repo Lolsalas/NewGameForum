@@ -29,7 +29,7 @@ func main() {
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000"}, // tu frontend
+		AllowOrigins:     []string{"http://localhost:3000", "https://localhost:3001"}, // tu frontend
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -41,5 +41,6 @@ func main() {
 	router.GET("/getusers", hdlr.GetUsers)
 	router.POST("/login", hdlr.Login)
 	router.GET("/forum/:Forum_ID", hdlr.GetForum)
+	router.POST("/forum/:Forum_ID/createpost", hdlr.CreatePost)
 	router.Run("localhost:8081")
 }

@@ -4,14 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "https-dev": "local-ssl-proxy --source 3001 --target 3000 --cert localhost.pem --key localhost-key.pem",
+    "start-all": "npm run dev & npm run https-dev"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.5",
     "@mui/material": "^7.3.4",
+    "http-proxy-middleware": "^3.0.5",
+    "mkcert": "^3.2.0",
     "mui": "^0.0.1",
     "next": "16.0.1",
     "react": "19.2.0",
@@ -23,6 +25,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
+    "local-ssl-proxy": "^2.0.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

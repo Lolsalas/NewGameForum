@@ -19,15 +19,22 @@ function Login(){
   const handleLogin=async(e:React.FormEvent)=>{
     e.preventDefault()
 
-    const res=await fetch("http://localhost:8081/login",{
+    const res=await fetch(`http://localhost:8081/login`,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      credentials:"include",
       body:JSON.stringify({email,password})
     })
     const data=await res.json()
+    console.log("Token recibido:", data.token);
+
     if(res.ok){
-      router.push("/")
+      if(data.token){
+      localStorage.setItem('authToken',data.token)
+      router.push("/CreateForum")
+    }
+    else{
+      console.error('No se devolvio el token')
+    }
     }
     else{
       console.error("Error login",data.error)
