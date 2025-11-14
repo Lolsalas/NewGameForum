@@ -13,7 +13,9 @@ type DBManager struct {
 }
 
 func New(url string) *DBManager {
-	db, err := gorm.Open(postgres.Open(url), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(url), &gorm.Config{
+		DisableForeignKeyConstraintWhenMigrating: true,
+	})
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -59,7 +61,7 @@ func (db *DBManager) Login(email, password string) (*models.User, error) {
 	return &user, nil
 }
 
-func (db *DBManager) CreatePost(post string, title string, userid int64, forumid int) error {
+func (db *DBManager) CreatePost(post string, title string, userid int, forumid int) error {
 	Post := models.Post{Post_Title: title, Post_Text: post, Users_ID: userid, Forum_ID: forumid}
 	result := db.Orm.Create(&Post)
 	if result.Error != nil {

@@ -190,26 +190,46 @@ func (h *handler) GetCurrentUser(c *gin.Context) {
 
 func (h *handler) CreatePost(c *gin.Context) {
 
-	session, err := h.store.Get(c.Request, "session")
+	tokenString := c.GetHeader("Authorization")
 
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "No se pudo obtener la sesion"})
+	if tokenString == "" || !strings.HasPrefix(tokenString, "Bearer") {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token de Autorizacion requerido"})
+		c.Abort()
 		return
 	}
 
-	auth, ok := session.Values["authenticated"].(bool)
-	if !ok || !auth {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "usuario no encontrado"})
+	tokenString = strings.TrimPrefix(tokenString, "Bearer ")
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Metodo de firma inesperado", token.Header["alg"])
+		}
+		return jwtsecret, nil
+	})
+
+	if err != nil || !token.Valid {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token invalido o expirado"})
+		c.Abort()
 		return
 	}
 
-	userID, ok := session.Values["user_id"].(int64)
-	println(userID)
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		if userIDFloat, ok := claims["user_id"].(float64); ok {
+			userID := int(userIDFloat)
+			c.Set("userID", userID)
+		}
+	}
 
+	userID, exists := c.Get("userID")
+
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuario no encontrado en el contexto."})
+		return
+	}
+
+	FinalUserID, ok := userID.(int)
 	if !ok {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "usuario no encontrado en la sesion",
-			"test": userID})
-		return
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error de ID"})
 	}
 
 	var new_post models.Post
@@ -219,7 +239,7 @@ func (h *handler) CreatePost(c *gin.Context) {
 		return
 	}
 
-	err = h.db_manager.CreatePost(new_post.Post_Text, new_post.Post_Title, userID, new_post.Forum_ID)
+	err = h.db_manager.CreatePost(new_post.Post_Text, new_post.Post_Title, FinalUserID, new_post.Forum_ID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

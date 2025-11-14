@@ -8,8 +8,8 @@ type Post struct {
 	gorm.Model
 	Post_Text  string
 	Post_Date  string
-	Post_ID    int
-	Users_ID   int64
+	Post_ID    int `gorm:"primaryKey;autoIncrement"`
+	Users_ID   int `gorm:"foreignKey:users_id"`
 	Post_Title string
-	Forum_ID   int
+	Forum_ID   int `gorm:"foreignKey:forum_id"`
 }

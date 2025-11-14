@@ -20,14 +20,22 @@ function CreatePost()
     const handlePost=async(e:React.FormEvent)=>{
         e.preventDefault()
 
+        const authToken=localStorage.getItem("authToken")
+        if(!authToken){
+            console.error("Usuario no encontrado")
+            return
+        }
+
+
+
         const res=await fetch(`http://localhost:8081/forum/${Forum_ID}/createpost`,{
             method:"POST",
-            credentials:'include',
             headers:{
-                "Content-Type":"application/json"
+                "Content-Type":"application/json",
+                'Authorization':`Bearer ${authToken}`
             },
             body:JSON.stringify({
-                Forum_ID:Forum_ID,
+                Forum_ID:Number(Forum_ID),
                 Post_Title:Post_Title,
                 Post_Text:Post_Text,
             })

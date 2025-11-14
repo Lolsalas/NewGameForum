@@ -26,6 +26,11 @@ func main() {
 		log.Fatalln("Failed to migrate database:", err)
 	}
 
+	err = db.Orm.AutoMigrate(&models.Post{})
+	if err != nil {
+		log.Fatalln("Failed to migrate database:", err)
+	}
+
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
