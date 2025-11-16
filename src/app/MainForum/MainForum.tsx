@@ -6,21 +6,26 @@ import './MainForum.css'
 import { useParams } from "next/navigation";
 import { useEffect,useState } from "react";
 
-
+interface User{
+  Users_id:number;
+  Username:string;
+}
 
 interface Post {
-  ID: number;
-  Title: string;
-  Content: string;
-  UserID: number;
-  CreatedAt: string;
-  RepliesCount?: number;
+	Post_Text : string;
+	Post_Date : string;
+	Post_ID   : number;
+	Users_ID  : number; 
+	Post_Title : string;
+	Forum_ID   : number; 
+  User: User;
 }
 
 interface ForumType {
-  forum_id: number;
-  Forum_Name: string;
-  Posts: Post[];  // aquí especificamos que Posts es un arreglo de Post
+	Forum_Name :string;
+	Forum_ID    :number;    
+	Forum_Posts :Post[]; 
+
 }
 
 function MainForum()
@@ -41,7 +46,7 @@ function MainForum()
       }
 
       try {
-        const res = await fetch(`http://localhost:8081/MainForum/${Forum_ID}`);
+        const res = await fetch(`http://localhost:8081/forum/${Forum_ID}`);
         const data = await res.json();
         console.log("Respuesta del backend:", data); // Depuración
 
@@ -74,16 +79,16 @@ function MainForum()
                     (
                         <MainForumElements key={index} id={item.id} title={item.title} author={item.author} date={item.date} replies={item.replies}></MainForumElements>
                     ))} */}
-                    {Forum?.Posts && Forum.Posts.length>0 ? (
-                        Forum?.Posts?.map((post,index)=>(
+                    {Forum?.Forum_Posts && Forum.Forum_Posts.length>0 ? (
+                        Forum.Forum_Posts.map((post,index)=>(
                             <MainForumElements
                             key={index}
-                            id={post.ID}
-                            author={post.UserID.toString()}
+                            id={post.Forum_ID}
+                            author={post.User?.Username?? "Unknown"}
                             date="dasdsa"
                             replies="sdads"
-                            title={post.Title}>
-
+                            title={post.Post_Title}
+                            postid={post.Post_ID}>
                             </MainForumElements>
                         ))
                     ):(

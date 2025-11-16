@@ -47,5 +47,6 @@ func main() {
 	router.POST("/login", hdlr.Login)
 	router.GET("/forum/:Forum_ID", hdlr.GetForum)
 	router.POST("/forum/:Forum_ID/createpost", hdlr.CreatePost)
+	router.GET("/forum/:Forum_ID/:Post_ID", hdlr.GetPost)
 	router.Run("localhost:8081")
 }

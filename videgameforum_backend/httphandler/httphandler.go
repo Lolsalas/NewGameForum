@@ -153,11 +153,25 @@ func (h *handler) GetForum(c *gin.Context) {
 	forumId, _ := strconv.Atoi(forumIdstr)
 
 	var forum models.Forum
-	if err := h.db_manager.Orm.Preload("Posts").First(&forum, forumId).Error; err != nil {
+	if err := h.db_manager.Orm.Preload("Forum_Posts.User").First(&forum, forumId).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Foro no encontrado"})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"forum": forum})
+}
+
+func (h *handler) GetPost(c *gin.Context) {
+	postIdstr := c.Param("Post_ID")
+	postId, _ := strconv.Atoi(postIdstr)
+
+	var posts models.Post
+	if err := h.db_manager.Orm.Preload("User").First(&posts, postId).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Post no encontrado"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"post": posts})
+
 }
 
 func (h *handler) GetCurrentUser(c *gin.Context) {

@@ -1,4 +1,4 @@
-import Post from "./post";
+import Post from "../../../Post/post";
 import './post.css'
 
 const elements={
@@ -12,7 +12,7 @@ const elements={
 function post()
 {
     return(
-        <Post item={elements}></Post>
+        <Post></Post>
     )
 }
 

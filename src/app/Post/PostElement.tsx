@@ -2,7 +2,7 @@ export interface PostElements{
     title:string
     author:string,
     date:string,
-    text:string
+    text:string,
 }
 
 function PostElement({author,date,text,title}:PostElements)
