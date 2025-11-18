@@ -1,12 +1,12 @@
 .Login{
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
 }
 
 
 .LoginCard {
-    background: white;
+  background: white;
   width: 360px;
   height:  450px;
   padding: 30px;
@@ -14,7 +14,7 @@
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
   text-align: center;
   margin: 0 auto;
-  
+  margin-top: 150px;
 }
 
 
@@ -28,7 +28,6 @@
 
 
 .LoginInput {
-  position: relative;
   margin-bottom: 15px;
 }
 

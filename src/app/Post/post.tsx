@@ -73,9 +73,7 @@ function Post()
 
     return(
     <div>
-        <TopBar></TopBar>
         <div className='Post'>
-            <SideBar></SideBar>
             <div className="PostCard">
                 <PostElement author={Post?.User?.Username ?? "Desconocido"} text={Post?.Post_Text ?? "Desconocido"} date={Post?.Post_Date ?? "Desconocido"} title={Post?.Post_Title ?? "Desconocido"}></PostElement>
             </div>

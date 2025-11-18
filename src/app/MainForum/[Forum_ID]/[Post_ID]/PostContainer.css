@@ -1,0 +1,26 @@
+.PostContainer{
+    display: flex;
+    justify-content: center;
+    margin-left: 70px;
+}
+
+.PostContainerCard{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height:  100%;
+    padding: 30px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    margin-top: 50px;
+    min-height: 20vh;
+    justify-content: flex-end ;
+}
+
+.PostContainerTitle{
+    color: black;
+    font-weight: 700;
+    display: flex;
+    justify-content: left;
+    margin-left: 170px;
+}

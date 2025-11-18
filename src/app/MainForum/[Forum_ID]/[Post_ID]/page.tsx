@@ -5,8 +5,12 @@ import CreateComment from "@/app/CreateComment/CreateComment";
 import { useEffect,useState } from "react";
 import { useParams } from "next/navigation";
 import './post.css'
+import './PostContainer.css'
+import '../../../CreateComment/CreateComment.css'
 import PostElement, { PostElements } from "@/app/Post/PostElement";
 import { elements } from "@/app/CreateComment/CreateCommentElements";
+import TopBar from "@/app/TopBar/TopBar";
+import SideBar from "@/app/SideBar/SideBar";
 
 function post()
 {
@@ -15,8 +19,17 @@ function post()
 
     return(
         <div>
-            <Post></Post>
-            <CreateComment></CreateComment>
+            <TopBar></TopBar>
+        <div className="PostContainer">
+            <SideBar></SideBar>
+            <div className="PostContainerCard">
+                <Post></Post>
+                <div className="PostContainerTitle">
+                    <h2>Comments</h2>
+                </div>
+                <CreateComment></CreateComment>
+            </div>
+        </div>
         </div>
     )
 }

@@ -28,7 +28,13 @@ function SideBar(){
   return(
     <div className="SideBar">
       {!isDesktop&& (
-        <IconButton className="hamburger-button" onClick={toggleDrawer(true)}>
+        <IconButton className="hamburger-button" onClick={toggleDrawer(true)} sx={{
+                position: 'fixed',
+                left: 10,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                zIndex: 1000,
+            }}>
           <MenuIcon></MenuIcon>
         </IconButton>
       )}

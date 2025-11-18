@@ -5,21 +5,21 @@
 }
 
 .CreateAccountCard {
-    background: hsl(0, 0%, 100%);;
+  background: hsl(0, 0%, 100%);;
   padding: 40px 50px;
   width: 500px;
   height: 700px;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.1);
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 150px;
 }
 
 
 .CreateAccountCard h2 {
   background: #727474;
   color: rgb(0, 0, 0);
-  padding: 15px;
+  padding: 15px;  
   margin: -50px -50px 50px -50px;
   border-radius: 8px 8px 0 0;
   font-size: 28px;

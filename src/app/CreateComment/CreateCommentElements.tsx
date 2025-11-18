@@ -10,12 +10,14 @@ export interface elements{
 function CreateCommentElements({Comment_Date,Comment_Text,User}:elements){
     return(
     <div className="CreateCommentElements">
+        <div className="CreateCommentInfo">
         <div className="CreateCommentUserRow">
             <span>{User}</span>
         </div>
         <div className="CreateCommentTextRow">
             <span>{Comment_Text}</span>
             <span>{Comment_Date}</span>
+        </div>
         </div>
     </div>
     )

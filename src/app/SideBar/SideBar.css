@@ -1,15 +1,19 @@
 .custom_drawer
 {
 width: 200px;
+position: fixed;
 }
 
 .SideBar
 {
+    position: fixed;
     display: flex;
     flex-direction: row;
     height: 100vh;
 }
 
 .DrawerDesktop .MuiDrawer-paper{
-    position: relative;
+    position: fixed;
+    margin-top: 78px;
 }
+

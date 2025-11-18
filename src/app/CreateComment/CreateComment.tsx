@@ -53,9 +53,7 @@ function CreateComment(){
     return(
 
     <div>
-        <TopBar></TopBar>
         <div className="CreateComment">
-            <SideBar></SideBar>
             <div className="CreateCommentCard">
                 {comments.map((post,index)=>(
                     <CreateCommentElements
