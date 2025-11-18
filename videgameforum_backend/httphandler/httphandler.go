@@ -262,3 +262,73 @@ func (h *handler) CreatePost(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "post creado"})
 
 }
+
+func (h *handler) GetComments(c *gin.Context) {
+	postIdstr := c.Param("Post_ID")
+	postId, _ := strconv.Atoi(postIdstr)
+	comments, err := h.db_manager.GetComments(postId)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, comments)
+}
+
+func (h *handler) InsertComment(c *gin.Context) {
+	tokenString := c.GetHeader("Authorization")
+
+	if tokenString == "" || !strings.HasPrefix(tokenString, "Bearer") {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token de Autorizacion requerido"})
+		c.Abort()
+		return
+	}
+
+	tokenString = strings.TrimPrefix(tokenString, "Bearer ")
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Metodo de firma inesperado", token.Header["alg"])
+		}
+		return jwtsecret, nil
+	})
+
+	if err != nil || !token.Valid {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token invalido o expirado"})
+		c.Abort()
+		return
+	}
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		if userIDFloat, ok := claims["user_id"].(float64); ok {
+			userID := int(userIDFloat)
+			c.Set("userID", userID)
+		}
+	}
+
+	userID, exists := c.Get("userID")
+
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuario no encontrado en el contexto."})
+		return
+	}
+
+	FinalUserID, ok := userID.(int)
+	if !ok {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error de ID"})
+	}
+
+	var new_comment models.Post_Comment
+
+	if err := c.ShouldBindJSON(&new_comment); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	err = h.db_manager.InsertComment(FinalUserID, new_comment.Comment_Text, new_comment.Comment_Date, new_comment.Forum_ID, new_comment.Post_ID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{"message": "comment creado"})
+}

@@ -1,14 +1,14 @@
 package models
 
 import (
-	"gorm.io/gorm"
+	"time"
 )
 
-type Comments struct {
-	gorm.Model
-	Comment_Date string
+type Post_Comment struct {
+	Comment_Date time.Time
 	Comment_Text string
-	Post_ID      int
-	Users_ID     int
-	Comment_ID   int
+	Forum_ID     int `gorm:"foreignKey:Forum_ID"`
+	Post_ID      int `gorm:"foreignKey:Post_ID"`
+	Users_ID     int `gorm:"foreignKey:Users_ID"`
+	Comment_ID   int `gorm:"primaryKey;autoIncrement"`
 }

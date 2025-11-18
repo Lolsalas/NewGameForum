@@ -1,0 +1,61 @@
+.PostComment{
+    display: flex;
+    justify-content: center;
+
+}
+
+.PostCommentCard{
+    color: black;
+    background: white;
+    width: 50%;
+    height:  100%;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    margin-top: 50px;
+    min-height: 70vh;
+    justify-content: center;
+}
+
+
+
+.PostCommentTextBox textarea{
+width: 100%;
+  box-sizing: border-box; 
+  height: 500px;  
+  padding: 10px 15px; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.PostCommentTextBox button{
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    color: red;
+    margin-left: auto;
+    cursor: pointer;
+    background-color: rgb(180, 187, 187);
+    border-radius: 8px;
+}
+
+.PostCommentTextBox button:hover{
+    text-decoration: underline;
+}
+
+.PostCommentTitle{
+    color: blue;
+    cursor: pointer;
+    display: flex;
+    height: 50px;
+    font-size: larger;
+    font-weight: bolder;
+}
+.PostCommentTitle:hover{
+    text-decoration: underline;
+}
+

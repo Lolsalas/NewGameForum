@@ -2,6 +2,7 @@ package repository
 
 import (
 	"log"
+	"time"
 
 	"github.com/Lolsalas/GameForum/models"
 	"gorm.io/driver/postgres"
@@ -77,4 +78,23 @@ func (db *DBManager) GetUser(id int) (*models.User, error) {
 		return nil, result.Error
 	}
 	return &User, nil
+}
+
+func (db *DBManager) GetComments(Post_ID int) ([]models.Post_Comment, error) {
+	var Comments []models.Post_Comment
+	result := db.Orm.Where("post_id = ?", Post_ID).Find(&Comments)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return Comments, nil
+}
+
+func (db *DBManager) InsertComment(userid int, commenttext string, commentdate time.Time, forumid int, postid int) error {
+
+	comments := models.Post_Comment{Users_ID: userid, Comment_Date: commentdate, Comment_Text: commenttext, Forum_ID: forumid, Post_ID: postid}
+	result := db.Orm.Create(&comments)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
 }

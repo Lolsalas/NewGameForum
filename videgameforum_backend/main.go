@@ -31,6 +31,11 @@ func main() {
 		log.Fatalln("Failed to migrate database:", err)
 	}
 
+	err = db.Orm.AutoMigrate(&models.Post_Comment{})
+	if err != nil {
+		log.Fatalln("Failed to migrate database:", err)
+	}
+
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
@@ -48,5 +53,7 @@ func main() {
 	router.GET("/forum/:Forum_ID", hdlr.GetForum)
 	router.POST("/forum/:Forum_ID/createpost", hdlr.CreatePost)
 	router.GET("/forum/:Forum_ID/:Post_ID", hdlr.GetPost)
+	router.GET("/forum/:Forum_ID/:Post_ID/comments", hdlr.GetComments)
+	router.POST("/forum/:Forum_ID/:Post_ID/postcomment", hdlr.InsertComment)
 	router.Run("localhost:8081")
 }

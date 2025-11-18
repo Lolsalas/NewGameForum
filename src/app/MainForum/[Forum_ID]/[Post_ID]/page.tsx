@@ -1,18 +1,23 @@
+'use client'
+
 import Post from "../../../Post/post";
+import CreateComment from "@/app/CreateComment/CreateComment";
+import { useEffect,useState } from "react";
+import { useParams } from "next/navigation";
 import './post.css'
-
-const elements={
-    title:'TestTitle',
-    author:'TestAuthor',
-    date:'TestDate',
-    text:'TestText',
-
-}
+import PostElement, { PostElements } from "@/app/Post/PostElement";
+import { elements } from "@/app/CreateComment/CreateCommentElements";
 
 function post()
 {
+
+
+
     return(
-        <Post></Post>
+        <div>
+            <Post></Post>
+            <CreateComment></CreateComment>
+        </div>
     )
 }
 
