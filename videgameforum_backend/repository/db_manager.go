@@ -98,3 +98,12 @@ func (db *DBManager) InsertComment(userid int, commenttext string, commentdate t
 	}
 	return nil
 }
+
+func (db *DBManager) GetForums() ([]models.Forum, error) {
+	var Forums []models.Forum
+	result := db.Orm.Find(&Forums)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return Forums, nil
+}

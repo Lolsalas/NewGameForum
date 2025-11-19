@@ -1,18 +1,49 @@
+'use client'
+
 import MainMenuCard from "../MainMenuCard/MainMenuCard";
+import { useEffect,useState } from "react";
 import './MainMenu.css'
+
+interface Forums{
+    Forum_Name:  string
+	Forum_ID :   number    
+}
 
 function MainMenu()
 {
+  const [Forum, setForum] = useState<Forums[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchForum = async () => {
+
+
+      try {
+        const res = await fetch(`http://localhost:8081/forum`);
+        const data:Forums[]=await res.json();
+        console.log("Respuesta del backend:", data); // Depuración
+
+            if (res.ok) {
+                setForum(data)
+            } else {
+              console.error("Error del backend:", data);
+            }
+      } catch (err) {
+        console.error("Fetch falló:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchForum();
+  },[loading]);
+
+
     return(
         <div className='MainMenu'>
-            <MainMenuCard></MainMenuCard>
-            <MainMenuCard></MainMenuCard>
-            <MainMenuCard></MainMenuCard>
-            <MainMenuCard></MainMenuCard>
-            <MainMenuCard></MainMenuCard>
-            <MainMenuCard></MainMenuCard>
-            <MainMenuCard></MainMenuCard>
-            <MainMenuCard></MainMenuCard>
+            {Forum.map((forum,index)=>(
+                <MainMenuCard key={index} Title={forum.Forum_Name}></MainMenuCard>
+            ))}
         </div>
     )
 }

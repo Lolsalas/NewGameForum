@@ -55,5 +55,6 @@ func main() {
 	router.GET("/forum/:Forum_ID/:Post_ID", hdlr.GetPost)
 	router.GET("/forum/:Forum_ID/:Post_ID/comments", hdlr.GetComments)
 	router.POST("/forum/:Forum_ID/:Post_ID/postcomment", hdlr.InsertComment)
+	router.GET("/forum", hdlr.GetForums)
 	router.Run("localhost:8081")
 }

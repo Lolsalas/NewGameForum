@@ -332,3 +332,12 @@ func (h *handler) InsertComment(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, gin.H{"message": "comment creado"})
 }
+
+func (h *handler) GetForums(c *gin.Context) {
+	Forums, err := h.db_manager.GetForums()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, Forums)
+}
