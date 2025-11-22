@@ -28,6 +28,11 @@
   padding: 30px;
 }
 
+.MainForumElement{
+  padding: 30px;
+  margin-top: 10px;
+}
+
 .MainForumElement:hover{
   background-color: #d3cfcf;
 }
@@ -59,6 +64,24 @@
   font-size: 13px;
   color: #000000;
   margin-top: 4px;
+}
+
+.MainForumCreatePostButton{
+    display: flex;
+    width: 30%;
+    align-items: right;
+    padding: 20px;
+    color: rgb(30, 0, 255);
+    margin-left: auto;
+    cursor: pointer;
+    gap: 20px;
+    background-color: rgb(204, 212, 212);
+    border-radius: 8px;
+    margin: bottom 5%;
+}
+
+.Container{
+  gap: 20px;
 }
 
 
