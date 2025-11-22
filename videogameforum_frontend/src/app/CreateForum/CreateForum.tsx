@@ -26,7 +26,7 @@ function CreateForum()
             return
         }
 
-        const res = await fetch(`/api/createforum`, {
+        const res = await fetch(`http://localhost:8081/createforum`, {
             method:"POST",
             body:JSON.stringify({Forum_Name}),
             headers:{"Content-Type":"application/json",

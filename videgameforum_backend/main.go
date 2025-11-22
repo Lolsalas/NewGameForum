@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const url string = "postgres://postgres:root@localhost:5432/videogame_forum?sslmode=disable"
+const url string = "postgres://postgres:root@postgres:5432/videogame_forum?sslmode=disable"
 
 func main() {
 	db := repository.New(url)
@@ -39,7 +39,7 @@ func main() {
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000", "https://localhost:3001"}, // tu frontend
+		AllowOrigins:     []string{"http://frontend:3000", "https://frontend:3001", "http://localhost:3000"}, // tu frontend
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -56,5 +56,5 @@ func main() {
 	router.GET("/forum/:Forum_ID/:Post_ID/comments", hdlr.GetComments)
 	router.POST("/forum/:Forum_ID/:Post_ID/postcomment", hdlr.InsertComment)
 	router.GET("/forum", hdlr.GetForums)
-	router.Run("localhost:8081")
+	router.Run("0.0.0.0:8081")
 }
