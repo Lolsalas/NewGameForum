@@ -42,7 +42,7 @@ function MainMenu()
     return(
         <div className='MainMenu'>
             {Forum.map((forum,index)=>(
-                <MainMenuCard key={index} Title={forum.Forum_Name}></MainMenuCard>
+                <MainMenuCard key={index} Id={forum.Forum_ID} Title={forum.Forum_Name}></MainMenuCard>
             ))}
         </div>
     )
