@@ -1,89 +1,156 @@
+/* --- 1. Variables de Modo Oscuro --- */
+:root {
+    /* Colores base */
+    --topbar-bg: #33363b; /* Gris oscuro para TopBar */
+    --sidebar-bg: #212121; /* Gris muy oscuro para SideBar */
+    --page-bg: #1c1c1e;   /* Fondo de página, casi negro */
+    --card-bg: #2c2f33;   /* Fondo de la tarjeta/lista de hilos */
+    
+    /* Colores de contenido */
+    --primary-text: #f6f6f6;
+    --secondary-text: #999999;
+    --border-color: #3e4146;
+    --highlight-color: #ffc107; /* Amarillo/Dorado para resaltar */
+    --row-hover-bg: #33363b;
+}
+
+body {
+    background-color: var(--page-bg);
+    margin: 0 auto;
+    font-family: sans-serif;
+    color: var(--primary-text);
+}
+
+/* --- 2. Layout Principal (TopBar, SideBar y Contenido) --- */
+
+/* Contenedor principal debajo del TopBar */
 .MainForum {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-
-
-.MainForumCard {
-  background: white;
-  width: 80%;
-  height:  100%;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 160px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin-left: 15%;
-}
-
-.MainForumTitleRow {
-  display: flex;
-  gap: 8px;
-  padding: 30px;
-}
-
-.MainForumElement{
-  padding: 30px;
-  margin-top: 10px;
-}
-
-.MainForumElement:hover{
-  background-color: #d3cfcf;
-}
-
-.MainForumTitle {
-  font-size: 16px;
-  margin: 0;
-  cursor: pointer;
-  color: #276ef1;
-}
-
-.MainForumTitle:hover {
-  text-decoration: underline;
-}
-
-.MainForumTitleMeta {
-  display: flex;
-  font-size: 13px;
-  color: #000000;
-  margin-top: 4px;
-  border-bottom: 0.5px solid #242424;
-  align-items: center;
-  justify-content: center;
-  gap: 100px;
-  flex-wrap: wrap;
-}
-
-.MainForumInfo{
-  font-size: 13px;
-  color: #000000;
-  margin-top: 4px;
-}
-
-.MainForumCreatePostButton{
     display: flex;
-    width: 30%;
-    align-items: right;
+    /* Necesitas margen superior si TopBar es fijo (position: fixed) */
+    /* Aquí se asume que TopBar tiene una altura de ~50px */
+    min-height: calc(100vh - 50px); /* Altura mínima de la vista */
+}
+
+/* El contenido del Foro (La tarjeta) */
+.MainForumCard {
+    flex-grow: 1; /* Ocupa el espacio restante horizontalmente */
     padding: 20px;
-    color: rgb(30, 0, 255);
-    margin-left: auto;
+    margin-left: 220px;
+    margin-right: 20px;
+    margin-top: 120px;
+    background-color: var(--card-bg); /* Fondo de la lista/tarjeta */
+    border-radius: 8px; /* Esquinas suaves */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+    min-width: 0; /* Asegura que no desborde en el flex container */
+}
+
+
+/* --- 3. Estilos de la Lista de Hilos (Basados en MainForumElements) --- */
+
+/* Estilos para el botón de Crear Post */
+.main-actions {
+    display: flex;
+    justify-content: flex-end; 
+    margin-bottom: 20px; 
+}
+
+
+/* --- Estilos de Encabezados (Header) --- */
+.forum-header {
+    display: flex;
+    padding: 10px 0;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: var(--secondary-text);
+    border-bottom: 1px solid var(--border-color); 
+}
+
+/* --- Estilos de la Fila de Hilo (Thread Row) --- */
+.forum-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color); 
+    background-color: var(--card-bg); /* Mismo color que la tarjeta */
+}
+
+.forum-row:hover {
+    background-color: var(--row-hover-bg);
     cursor: pointer;
-    gap: 20px;
-    background-color: rgb(204, 212, 212);
-    border-radius: 8px;
-    margin: bottom 5%;
 }
 
-.Container{
-  gap: 20px;
+/* --- Layout y Anchos de Columnas --- */
+
+/* Columna 1: Topic (Título) */
+.topic-cell {
+    flex-basis: 60%;
+    padding-right: 20px;
+}
+/* Columna 2: Author */
+.author-cell {
+    flex-basis: 15%; 
+    text-align: right;
+}
+/* Columna 3: Replies */
+.replies-cell {
+    flex-basis: 15%; 
+    text-align: right;
+    font-size: 0.9em;
+}
+/* Columna 4: Activity (date) */
+.activity-cell {
+    flex-basis: 10%;
+    text-align: right;
+    font-size: 0.9em;
 }
 
 
+/* Asegurar alineación de encabezados con las celdas */
+.header-topic { flex-basis: 60%; padding-right: 20px; }
+.header-author { flex-basis: 15%; text-align: right; }
+.header-replies { flex-basis: 15%; text-align: right; }
+.header-activity { flex-basis: 10%; text-align: right; }
+
+/* --- Estilos de Contenido (Texto y Metadata) --- */
+
+.thread-title {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+.topic-cell a {
+    color: var(--primary-text);
+    text-decoration: none;
+}
+
+.sub-info {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: var(--secondary-text);
+}
 
 
+.discussion-marker {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--highlight-color); 
+    margin-right: 5px;
+}
+
+
+.stat {
+    margin-left: 10px;
+    white-space: nowrap; 
+}
+.author-link {
+    color: var(--secondary-text);
+    text-decoration: none;
+}
+.author-link:hover {
+    color: var(--primary-text);
+}

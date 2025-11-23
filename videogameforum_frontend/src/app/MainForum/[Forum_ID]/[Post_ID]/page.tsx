@@ -18,7 +18,7 @@ function post()
 
 
     return(
-        <div>
+        <div className="PostWrapper">
             <TopBar></TopBar>
         <div className="PostContainer">
             <SideBar></SideBar>

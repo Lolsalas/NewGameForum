@@ -3,40 +3,57 @@
     justify-content: center;
 }
 
-.PostCard{
-    color: black;
-    background: white;
-    width: 80%;
-    height:  100%;
-    padding: 30px;
+/* --- PostElement.css (Post Principal) --- */
+
+.PostCard {
+    /* Estilo del contenedor principal del post */
+    margin: 20px auto; 
+    padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    margin-top: 50px;
-    min-height: 20vh;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    background-color: var(--main-post-bg);
+    border: 1px solid var(--border-color);
+    width: 100%;
 }
 
-.PostElement{
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 50px;
+.PostTitle {
+    margin-bottom: 20px;
 }
 
-.PostTitle{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;    
+.PostTitle h1 {
+    color: var(--primary-text);
+    font-size: 2.2em;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    /* Separador visual destacado */
+    border-bottom: 2px solid var(--highlight-color); 
+    padding-bottom: 10px;
 }
 
-.PostInfo{
+.PostMeta {
+    margin-bottom: 25px;
+    font-size: 0.95em;
+    color: var(--secondary-text);
     display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 30px;
-    flex-direction: row;
+    gap: 10px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.PostAuthor {
+    font-weight: 600;
+    color: var(--highlight-color);
+}
+
+.PostText {
+    padding-top: 15px; 
+    white-space: pre-wrap;
+}
+
+.PostText p {
+    color: var(--primary-text);
+    font-size: 1.1em;
+    line-height: 1.8;
+    margin: 0;
 }

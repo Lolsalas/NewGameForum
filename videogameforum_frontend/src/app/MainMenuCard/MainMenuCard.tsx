@@ -10,15 +10,16 @@ interface elements{
 
 function MainMenuCard({Title,Id}:elements)
 {
-    return (
-        <div className="MainMenuCard">
-            <div className="ForumTitle">
-                <h3>
-                    <Link href={`/MainForum/${Id}`}>{Title}</Link>
-                </h3>
+return (
+        <Link href={`/MainForum/${Id}`} className="forum-card-link">
+            <div className="forum-card">
+                <div className="forum-details">
+                    <h3 className="forum-name">{Title}</h3>
+                </div>
             </div>
-        </div>
-    )
+        </Link>
+    );
 }
+
 
 export default MainMenuCard

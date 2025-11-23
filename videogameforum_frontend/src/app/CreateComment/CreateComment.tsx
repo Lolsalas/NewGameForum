@@ -53,24 +53,6 @@ function CreateComment(){
         fetchPost();
       },[Forum_ID, Post_ID]);
 
-        const PopUp=({onClose}:{onClose: ()=>void})=>{
-        return(
-            <div className="PopUpCard">
-                <div className="PopUpInfo">
-                    <h2>ALTO!!!</h2>
-                    <span>Necesitas iniciar sesion para tener acceso a esta funcion.</span>
-                    <div className="PopUpLink">
-                        <Link href="/Login">Pulsa aqui para ir a la pantalla de inicio de sesion.</Link>
-                    </div>
-                    <button>
-                        <Link href='/'>
-                            Pulsa aqui para volver al menu principal
-                        </Link>
-                    </button>
-                </div>
-            </div>
-        )
-    }
 
 
     return(
@@ -88,7 +70,6 @@ function CreateComment(){
             </div>
         </div>
     </div>
-      {showLoginPopup && <PopUp onClose={() => setShowLoginPopup(false)} />}
     </>
     )
 }

@@ -1,26 +1,52 @@
-.PostContainer{
-    display: flex;
-    justify-content: center;
-    margin-left: 70px;
+/* --- post.css --- */
+
+/* Variables de Color (Asegúrate de que estas estén en tu CSS global) */
+:root {
+    --page-bg: #1c1c1e;   
+    --sidebar-width: 200px;
+    --topbar-height: 50px;
+    --card-bg: #2c2f33;    
+    --main-post-bg: #33363b;
+    --primary-text: #f6f6f6;
+    --secondary-text: #cccccc;
+    --border-color: #3e4146;
+    --highlight-color: #ffc107;
 }
 
-.PostContainerCard{
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    height:  100%;
-    padding: 30px;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    margin-top: 50px;
-    min-height: 20vh;
-    justify-content: flex-end ;
+body {
+    background-color: var(--page-bg);
+    margin: 0;
 }
 
-.PostContainerTitle{
-    color: black;
-    font-weight: 700;
+/* 2. Contenedor que alinea SideBar (fixed) y Contenido (moved) */
+.PostContainer {
     display: flex;
-    justify-content: left;
-    margin-left: 170px;
+    width: 100%;
+}
+
+/* 3. Posicionamiento del Contenido Principal */
+.PostContainerCard {
+    /* Mueve el contenido hacia la derecha para hacer espacio a la SideBar (200px + 20px de margen) */
+    margin-left: 220px;
+    flex-grow: 1; /* Ocupa el espacio restante */
+    padding: 20px;
+    background-color: var(--page-bg); /* Fondo del área de contenido */
+    min-height: 100vh; /* Para que el fondo cubra toda la altura */
+    min-width: 0;
+    margin-top: 120px;
+    width: 100%;
+}
+
+/* 4. Estilos de la sección Comentarios */
+.PostContainerTitle {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.PostContainerTitle h2 {
+    color: var(--primary-text);
+    font-size: 1.5em;
+    margin: 0;
 }

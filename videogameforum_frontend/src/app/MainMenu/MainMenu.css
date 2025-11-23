@@ -1,13 +1,27 @@
-.MainMenu{
-    display: flex;
-    flex-direction: wrap;
-    flex-wrap: wrap;
-    gap: 20px;
-    flex: 1;
-    padding: 20px;
-    margin: 0 auto;
+:root {
+    /* Colores base */
+    --topbar-bg: #33363b; /* Gris oscuro para TopBar */
+    --sidebar-bg: #212121; /* Gris muy oscuro para SideBar */
+    --page-bg: #1c1c1e;   /* Fondo de página, casi negro */
+    --card-bg: #2c2f33;   /* Fondo de la tarjeta/lista de hilos */
+    
+    /* Colores de contenido */
+    --primary-text: #f6f6f6;
+    --secondary-text: #999999;
+    --border-color: #3e4146;
+    --highlight-color: #ffc107; /* Amarillo/Dorado para resaltar */
+    --row-hover-bg: #33363b;
 }
 
-.MainMenu > * {
-    flex: 1 1 calc(50% - 20px); /* 2 columnas */
+.MainMenu{
+
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    background-color: var(--page-bg); 
+    margin-top: 100px;
+    margin-left: 220px;
 }
+
+

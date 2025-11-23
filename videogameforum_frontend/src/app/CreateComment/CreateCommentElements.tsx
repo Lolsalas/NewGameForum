@@ -9,17 +9,21 @@ export interface elements{
 
 function CreateCommentElements({Comment_Date,Comment_Text,User}:elements){
     return(
-    <div className="CreateCommentElements">
-        <div className="CreateCommentInfo">
-        <div className="CreateCommentUserRow">
-            <span>{User}</span>
+        <div className="CommentCard">
+            
+            {/* Columna 1: Información del Usuario/Metadata */}
+            <div className="CommentMetaPanel">
+                {/* Opcional: Icono de Avatar o inicial */}
+                <span className="CommentAuthor">{User}</span>
+                <span className="CommentDate">{Comment_Date}</span>
+            </div>
+            
+            {/* Columna 2: Cuerpo del Comentario */}
+            <div className="CommentBody">
+                <p className="CommentText">{Comment_Text}</p>
+                {/* Opcional: Botones de Responder/Votar */}
+            </div>
         </div>
-        <div className="CreateCommentTextRow">
-            <span>{Comment_Text}</span>
-            <span>{Comment_Date}</span>
-        </div>
-        </div>
-    </div>
     )
 }
 

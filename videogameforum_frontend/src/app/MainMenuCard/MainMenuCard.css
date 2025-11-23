@@ -1,16 +1,68 @@
-.MainMenuCard {
-  background: #ece9e9;
-  border-radius: 8px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  margin: 0 auto;
-  margin-top: 100px;
-  margin-left: 200px;
+:root {
+    /* Colores base */
+    --topbar-bg: #33363b; /* Gris oscuro para TopBar */
+    --sidebar-bg: #212121; /* Gris muy oscuro para SideBar */
+    --page-bg: #1c1c1e;   /* Fondo de página, casi negro */
+    --card-bg: #2c2f33;   /* Fondo de la tarjeta/lista de hilos */
+    
+    /* Colores de contenido */
+    --primary-text: #f6f6f6;
+    --secondary-text: #999999;
+    --border-color: #3e4146;
+    --highlight-color: #ffc107; /* Amarillo/Dorado para resaltar */
+    --row-hover-bg: #33363b;
+}
+.forum-card-link {
+    text-decoration: none; 
 }
 
-.ForumTitle{
-    color: black;
+.forum-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* Colores y bordes */
+    background-color: var(--card-bg); 
+    padding: 20px;
+    border-radius: 6px;
+    border-left: 5px solid var(--highlight-color); 
+    transition: background-color 0.2s;
+}
+
+.forum-card:hover {
+    background-color: var(--row-hover-bg); 
+}
+
+
+.forum-details {
+    flex-grow: 1;
+    margin-right: 30px;
+}
+
+.forum-name {
+    margin: 0 0 5px 0;
+    color: var(--primary-text);
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.forum-description {
+    margin: 0;
+    color: var(--secondary-text); 
+    font-size: 0.9em;
+}
+
+/* Estadísticas (A la derecha) */
+.forum-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    color: var(--secondary-text);
+    font-size: 0.9em;
+    width: 150px;
+}
+
+.activity-time {
+    color: var(--highlight-color); 
+    font-weight: 500;
 }
