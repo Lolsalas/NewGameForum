@@ -63,20 +63,36 @@ function PostComments()
 
     return(
         <>
-        <div>
+       <div className="post-page-wrapper">
             <TopBar></TopBar>
-            <div className="PostComment">
+            
+            <div className="PostComment Layout"> 
                 <SideBar></SideBar>
-                <div className="PostCommentCard">
+                
+                <div className="PostCommentCard content-card"> 
+                    
                     <div className="PostCommentTitle">
-                    <h2>Create a Comment</h2>
+                        <h2 className="section-title">Escribe un Comentario</h2>
                     </div>
-                    <div className="PostCommentTextBox">
-                    <form onSubmit={handlePost}>
-                        <textarea placeholder="Write your post here!" value={comment} onChange={(e)=>setComments(e.target.value)}></textarea>
-                        <button type="submit">Create Comment</button>
-                    </form>
+                    
+                    <div className="PostCommentTextBox form-area">
+                        <form onSubmit={handlePost} className="comment-form">
+                            
+                            <textarea 
+                                placeholder="Únete a la discusión..." 
+                                className="comment-textarea post-textarea"
+                                value={comment} 
+                                onChange={(e)=>setComments(e.target.value)}
+                                required
+                            ></textarea>
+                            
+                            <button type="submit" className="comment-submit-button post-submit-button">
+                                Publicar Comentario
+                            </button>
+                            
+                        </form>
                     </div>
+
                 </div>
             </div>
         </div>

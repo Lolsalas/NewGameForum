@@ -43,27 +43,30 @@ function Login(){
 
     return(
         
-        <div>
-            <TopBar></TopBar>
-            <div className="Layout">
-            <SideBar></SideBar>
-            <div className="LoginCard">
-              <form onSubmit={handleLogin}>
-                <h2>Login</h2>
-                <div className="LoginInput">
+       <div className="login-page-wrapper"> {/* Nueva clase para centrado total */}
+        <TopBar></TopBar>
+        
+        {/* Eliminamos <div className="Layout"> y <SideBar> para centrar */}
+        <div className="LoginCard">
+          <SideBar></SideBar>
+            <form onSubmit={handleLogin} className="login-form"> {/* Añadimos clase form */}
+                <h2 className="login-title">Login</h2> {/* Añadimos clase título */}
+                
+                <div className="LoginInput form-group">
                     <label className="Icon" htmlFor="email">👤</label>
-                    <input type="email" name="Email" id="email" placeholder="Email or Phone" value={email} onChange={(e)=>setEmail(e.target.value)} required/>
+                    <input type="email" name="Email" id="email" placeholder="Email or Phone" required/>
                 </div>
-                    <div className="LoginInput">
+                
+                <div className="LoginInput form-group">
                     <label className="Icon" htmlFor="pword">🔒</label>
-                    <input type="password" name="Password" id="pword" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
+                    <input type="password" name="Password" id="pword" placeholder="Password" required/>
                 </div>
+                
                 <button className="LoginButton" type="submit">Login</button>
-                </form>
-                <Link href='/CreateAccount' className="LoginSignUp">Not a member? Sign Up!</Link>
-            </div>
-            </div>
+            </form>
+            <Link href='/CreateAccount' className="LoginSignUp register-link">Not a member? Sign Up!</Link>
         </div>
+    </div>
     )
 }
 

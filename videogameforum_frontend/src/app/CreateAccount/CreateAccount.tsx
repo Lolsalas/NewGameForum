@@ -32,25 +32,55 @@ function CreateAccount() {
   };
 
     return(
-        <div>
+       <div className="post-page-wrapper"> 
             <TopBar></TopBar>
-            <div className="CreateAccount">
-                <SideBar></SideBar>
-                <div className="CreateAccountCard">
-                    <form onSubmit={handleSubmit}>
-                    <h2>Create your account</h2>
-                    <label htmlFor="email">Email</label>
-                    <div className="CreateAccountInput">
-                        <input type="email" name="Email" id="email" onChange={e=>setEmail(e.target.value)}/>
-                    </div>
-                    <label htmlFor="uname">Username</label>
-                    <input type="text" name="Username" id="uname" onChange={e=>setUsername(e.target.value)}/>
-                    <label htmlFor="pword">Password</label>
-                    <input type="password" name="Password" id="pword" onChange={e=>setPassword(e.target.value)}></input>
-                    {/* <label htmlFor="">Confirm Password</label>
-                    <input type='password'></input> */}
-                    <button className="CreateAccountButton">Create</button>
+            
+            {/* CreateAccount.Layout: Contenedor de dos columnas */}
+            <div className="CreateAccount Layout">
+                <SideBar></SideBar> {/* La SideBar se queda */}
+                
+                {/* CreateAccountCard.content-card: El contenido principal */}
+                <div className="CreateAccountCard content-card">
+                    
+                    <form onSubmit={handleSubmit} className="account-form"> {/* Clase específica para el formulario */}
+                        
+                        <h2 className="section-title">Crear tu cuenta</h2> {/* Título estilizado */}
+                        
+                        {/* Campo Email */}
+                        <div className="form-group">
+                            <label className="form-label" htmlFor="email">Email</label>
+                            <div className="LoginInput create-input-box">
+                                <input type="email" name="Email" id="email" className="login-input" required onChange={e=>setEmail(e.target.value)}/>
+                            </div>
+                        </div>
+                        
+                        {/* Campo Nombre de Usuario */}
+                        <div className="form-group">
+                            <label className="form-label" htmlFor="uname">Nombre de Usuario</label>
+                            <div className="LoginInput create-input-box">
+                                <input type="text" name="Username" id="uname" className="login-input" required onChange={e=>setUsername(e.target.value)}/>
+                            </div>
+                        </div>
+                        
+                        {/* Campo Contraseña */}
+                        <div className="form-group">
+                            <label className="form-label" htmlFor="pword">Contraseña</label>
+                            <div className="LoginInput create-input-box">
+                                <input type="password" name="Password" id="pword" className="login-input" required onChange={e=>setPassword(e.target.value)}/>
+                            </div>
+                        </div>
+                        
+                        <button className="CreateAccountButton post-submit-button" type="submit">
+                            Crear Cuenta
+                        </button>
+                        
                     </form>
+                    
+                    {/* Enlace a Login */}
+                    <p className="link-text">
+                        ¿Ya tienes cuenta? <a href="/login" className="register-link">Inicia Sesión</a>
+                    </p>
+                    
                 </div>
             </div>
         </div>

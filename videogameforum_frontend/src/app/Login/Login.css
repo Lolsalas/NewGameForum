@@ -5,69 +5,122 @@
 }
 
 
+/* --- Variables de Modo Oscuro --- */
+:root {
+    --page-bg: #1c1c1e;   
+    --card-bg: #2c2f33;    
+    --input-bg: #3e4146;   
+    --primary-text: #f6f6f6;
+    --secondary-text: #999999;
+    --border-color: #3e4146;
+    --highlight-color: #ffc107; 
+}
+
+/* 1. Contenedor de la Página (Centrado Total) */
+.login-page-wrapper {
+    /* Centrado total en la vista */
+    display: flex;
+    flex-direction: column; /* Apila TopBar y el contenido */
+    align-items: center; /* Centra horizontalmente el LoginCard */
+    min-height: 100vh;
+    background-color: var(--page-bg);
+    /* padding-top: 50px; si la TopBar es fixed, necesitas esto */
+}
+
+/* 2. Tarjeta del Formulario */
 .LoginCard {
-  background: white;
-  width: 360px;
-  height:  450px;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 150px;
+    width: 100%;
+    max-width: 380px; 
+    padding: 30px 40px; /* Más padding en horizontal */
+    margin-top: 120px; /* Separación de la TopBar */
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
+    border-top: 5px solid var(--highlight-color); 
 }
 
-
-.LoginCard h2 {
-  background: #727474;
-  color: white;
-  padding: 15px;
-  margin: -30px -30px 20px -30px;
-  border-radius: 8px 8px 0 0;
+/* Título */
+.LoginCard .login-title {
+    color: var(--primary-text);
+    font-size: 1.8em;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 600;
 }
 
-
+/* 3. Estilo del Campo de Entrada con Ícono (LoginInput) */
 .LoginInput {
-  margin-bottom: 15px;
+    display: flex; /* Para alinear el ícono y el input */
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: var(--input-bg);
+    border-radius: 4px;
+    padding: 0 10px; /* Padding dentro de la caja de input */
+    border: 1px solid var(--border-color);
+    transition: border-color 0.2s;
 }
 
-.LoginInput .icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #727474;
-  font-size: 14px;
+.LoginInput:focus-within {
+    border-color: var(--highlight-color); /* Resalta el borde al enfocar */
+}
+
+.LoginInput .Icon {
+    /* Estilo del ícono (👤 o 🔒) */
+    color: var(--secondary-text);
+    font-size: 1.2em;
+    padding-right: 10px;
+    user-select: none; /* Evita selección del emoji */
 }
 
 .LoginInput input {
-  width: 100%;
-  padding: 10px 10px 10px 35px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  outline: none;
+    /* El campo de texto en sí */
+    flex-grow: 1;
+    padding: 12px 0; /* Solo padding vertical */
+    background: none; /* Fondo transparente para usar el fondo del LoginInput */
+    color: var(--primary-text);
+    border: none;
+    outline: none;
+    font-size: 1em;
 }
 
-.LoginInput input:focus {
-  border-color: #727474;
+.LoginInput input::placeholder {
+    color: var(--secondary-text);
 }
 
-
-.LoginButton{
-  width: 100%;
-  padding: 12px;
-  background: #727474;
-  border: none;
-  color: white;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
+/* 4. Botón de Enviar */
+.LoginButton {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--highlight-color); /* Botón amarillo/dorado */
+    color: #33363b; /* Texto oscuro en el botón claro */
+    font-weight: 700;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .LoginButton:hover {
-  background: #727474;
+    background-color: #e0ac00; /* Un tono más oscuro al pasar el ratón */
 }
 
-.LoginSignUp{
-    color: blue;
+/* 5. Enlace de Registro */
+.LoginSignUp {
+    display: block;
+    text-align: center;
+    margin-top: 25px;
+    color: var(--secondary-text);
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.LoginSignUp.register-link {
+    color: var(--highlight-color);
+    font-weight: 600;
+}
+
+.LoginSignUp.register-link:hover {
+    text-decoration: underline;
 }

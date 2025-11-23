@@ -72,26 +72,55 @@ function CreatePost()
 
     return(
     <>
-    <div>
-        <TopBar></TopBar>
-        <div className="CreatePost">
-            <SideBar></SideBar>
-            <div className="CreatePostCard">
-                <div className="CreatePostTitle">
-                    <h2>Create a Post</h2>
-                </div>
-            <div className="CreatePostTextBox">
-                <form onSubmit={handlePost}>
-                    <label>Title of your post: </label>
-                    <input type="text" placeholder="Write the title!" value={Post_Title} onChange={(e)=>setTitle(e.target.value)}></input>
-                    <textarea placeholder="Write your post here!" value={Post_Text} onChange={(e)=>setContent(e.target.value)}></textarea>
-                    <button type="submit">Create Post</button>
-                </form>
-            </div>
+    <div className="post-page-wrapper"> 
+            <TopBar></TopBar>
+            
+            <div className="CreatePost Layout"> 
+                <SideBar></SideBar>
+                
+                <div className="CreatePostCard content-card"> 
+                    
+                    <div className="CreatePostTitle">
+                        <h2>Crear un Nuevo Hilo</h2>
+                    </div>
+                    
+                    <div className="CreatePostFormArea"> 
+                        <form onSubmit={handlePost} className="post-form">
+                            
+      
+                            <label className="form-label" htmlFor="post-title">Título de tu post:</label>
+                            <input 
+                                type="text" 
+                                id="post-title"
+                                placeholder="Escribe un título descriptivo..." 
+                                className="post-input"
+                                value={Post_Title} 
+                                onChange={(e)=>setTitle(e.target.value)} 
+                                required
+                            />
+                            
+        
+                            <label className="form-label" htmlFor="post-content">Contenido del Post:</label>
+                            <textarea 
+                                id="post-content"
+                                placeholder="Escribe tu mensaje aquí. Puedes usar Markdown simple si lo deseas." 
+                                className="post-textarea"
+                                value={Post_Text} 
+                                onChange={(e)=>setContent(e.target.value)}
+                                required
+                            ></textarea>
+                            
 
+                            <button type="submit" className="post-submit-button">
+                                Publicar Hilo
+                            </button>
+                            
+                        </form>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
     {showLoginPopup && <PopUp onClose={() => setShowLoginPopup(false)} />}
     </>
 

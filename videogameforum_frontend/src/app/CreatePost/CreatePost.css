@@ -1,61 +1,111 @@
+:root {
+    --page-bg: #1c1c1e;   
+    --input-bg: #3e4146;   
+    --primary-text: #f6f6f6;
+    --secondary-text: #999999;
+    --border-color: #3e4146;
+    --highlight-color: #ffc107; 
+    --sidebar-width: 200px;
+    --topbar-height: 50px;
+}
+
 .CreatePost{
     display: flex;
     justify-content: center;
 
 }
 
-.CreatePostCard{
-    color: black;
-    background: white;
-    width: 50%;
-    height:  100%;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+.CreatePost.Layout { 
+    display: flex;
+    min-height: calc(100vh - var(--topbar-height));
+    overflow-x: hidden;
+}
+
+.CreatePostCard.content-card {
+    margin-left: 220px; 
+    flex-grow: 1; 
+    padding: 20px;
+    background-color: var(--page-bg); 
+    min-width: 0;
+    margin-top: 100px;
+}
+
+.CreatePostTitle h2 {
+    color: var(--primary-text);
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+.post-form {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    margin-top: 160px;
-    min-height: 70vh;
-    justify-content: center;
-}
-
-
-
-.CreatePostTextBox textarea{
-width: 100%;
-  box-sizing: border-box; 
-  height: 500px;  
-  padding: 10px 15px; 
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.CreatePostTextBox button{
-    display: flex;
-    align-items: flex-end;
-    padding: 20px;
-    color: red;
-    margin-left: auto;
-    cursor: pointer;
-    background-color: rgb(180, 187, 187);
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 30px;
+    background-color: var(--card-bg);
     border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.CreatePostTextBox button:hover{
-    text-decoration: underline;
+.form-label {
+    color: var(--secondary-text);
+    font-size: 1em;
+    margin-bottom: 8px;
+    margin-top: 20px;
+    font-weight: 500;
 }
 
-.CreatePostTitle{
-    color: blue;
+
+.post-input {
+    padding: 12px;
+    background-color: var(--input-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1.1em;
+    transition: border-color 0.2s;
+}
+
+.post-input:focus {
+    border-color: var(--highlight-color);
+    outline: none;
+}
+
+
+.post-textarea {
+    min-height: 300px; 
+    padding: 15px;
+    background-color: var(--input-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    resize: vertical; 
+    margin-bottom: 30px;
+    transition: border-color 0.2s;
+}
+
+.post-textarea:focus {
+    border-color: var(--highlight-color);
+    outline: none;
+}
+
+
+.post-submit-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--highlight-color); 
+    color: #33363b; 
+    font-weight: 700;
+    font-size: 1.1em;
     cursor: pointer;
-    display: flex;
-    height: 50px;
-    font-size: larger;
-    font-weight: bolder;
-}
-.CreatePostTitle:hover{
-    text-decoration: underline;
+    align-self: flex-start; 
+    transition: background-color 0.2s;
 }
 
+.post-submit-button:hover {
+    background-color: #e0ac00;
+}

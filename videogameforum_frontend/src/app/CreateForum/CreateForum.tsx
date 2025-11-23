@@ -65,22 +65,40 @@ function CreateForum()
 
     return(
     <>
-    <div>
-        <TopBar></TopBar>
-        <div className="CreateForum">
-            <SideBar></SideBar>
-            <div className="CreateForumCard">
-                <h2>Create a Forum</h2>
-                <div className="CreateForumInput">
-                    <form onSubmit={handleSubmit}>
-                        <label>Write the name of the forum: </label>
-                        <input type="text" placeholder="Write Here!" value={Forum_Name} onChange={(e)=>setForumname(e.target.value)}></input>
-                        <button className="CreateForumButton" type="submit">Create</button>
-                    </form>
+<div className="post-page-wrapper"> 
+            <TopBar></TopBar>
+            
+            <div className="CreateForum Layout"> 
+                <SideBar></SideBar>
+                
+                <div className="CreateForumCard content-card"> 
+                    
+                    <h2 className="section-title">Crear un Nuevo Foro</h2>
+                    
+                    <div className="CreateForumFormArea">
+                        <form onSubmit={handleSubmit} className="forum-create-form">
+                            
+                            <label className="form-label" htmlFor="forum-name">Escribe el nombre del foro:</label>
+                            
+                            <input 
+                                type="text" 
+                                id="forum-name"
+                                placeholder="Nombre del Foro (Ej: Discusión General)" 
+                                className="forum-name-input post-input"
+                                value={Forum_Name} 
+                                onChange={(e)=>setForumname(e.target.value)}
+                                required
+                            />
+                            
+                            <button className="CreateForumButton post-submit-button" type="submit">
+                                Crear Foro
+                            </button>
+                            
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     {showLoginPopup && <PopUp onClose={() => setShowLoginPopup(false)} />}
     </>
     )
