@@ -8,10 +8,15 @@
     justify-content: space-between;
     align-items: center;
     background-color: rgb(57, 53, 53);
+    z-index: 1200;
 }
 
 .TopBar .TopLink{
     padding-right: 5px
+}
+
+.TopBar .TopLink:hover{
+    text-decoration: underline;
 }
     
 
@@ -20,3 +25,6 @@ input{
     margin-right: 100px;
 }
 
+a:hover{
+    text-decoration: underline;
+}

@@ -61,5 +61,6 @@ func main() {
 	router.GET("/forum/pinnedcomments", hdlr.GetPinnedForums)
 	router.GET("/forum/profile", hdlr.GetCurrentUser)
 	router.POST("/forum/profile/update", hdlr.UpdateProfile)
+	router.GET("/forum/:Forum_ID/countcomments")
 	router.Run("0.0.0.0:8081")
 }

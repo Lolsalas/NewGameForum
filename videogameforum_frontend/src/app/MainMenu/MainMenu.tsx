@@ -37,11 +37,12 @@ function MainMenu()
     };
 
     fetchForum();
-  },[loading]);
+  },[]);
 
 
     return(
         <div className='MainMenu'>
+          <h2 className="MainMenu-Title">Foros disponibles</h2>
             {Forum.map((forum,index)=>(
                 <MainMenuCard key={index} Id={forum.Forum_ID} Title={forum.Forum_Name}></MainMenuCard>
             ))}

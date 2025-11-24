@@ -137,6 +137,7 @@ const createPostLink = `/MainForum/${Forum_ID}/CreatePost`;
 
     }
 
+    
     return(
       <>
         <div>
@@ -151,6 +152,9 @@ const createPostLink = `/MainForum/${Forum_ID}/CreatePost`;
                         component={Link} 
                         href={createPostLink}
                         className="create-post-button"
+                        sx={{
+                          zIndex:1
+                        }}
                     >
                         Create Post
                     </Button>

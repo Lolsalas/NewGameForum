@@ -31,7 +31,7 @@ function TopBar(){
             onClick={handleLogout} 
             className="TopLinkButton" 
         >
-            Cerrar Sesión
+            <a>Cerrar Sesión</a>
         </button>
     ) : (
         <Link href='/Login'>Log In</Link>
@@ -39,7 +39,7 @@ function TopBar(){
     return(
         <div className='TopBar'>
             <div className="TopImage">
-            <Image width='150' height='150' src='/unnamed.png' alt="Logo"></Image>
+            <Image width='200' height='150' src='/unnamed.png' alt="Logo"></Image>
             </div>
             <div className="TopLink">
                 {AuthLink}

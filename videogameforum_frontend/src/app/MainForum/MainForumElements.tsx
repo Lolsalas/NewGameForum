@@ -96,8 +96,6 @@ return (
                 <div className="forum-header">
                     <div className="header-topic">Topic</div>
                     <div className="header-author">Author</div>
-                    <div className="header-replies">Replies</div>
-                    <div className="header-activity">Activity</div>
                 </div>
 
                 <div className="thread-list">
@@ -118,12 +116,6 @@ return (
                             <div className="author-cell">
                                 <Link href={`/user/${author}`} className="author-link">{author}</Link>
                             </div>
-
-                       
-                            <div className="replies-cell">
-                                <span className="stat replies">💬 {replies}</span>
-                            </div>
-                            <div className="activity-cell">{date}</div>
                         </div>
                     )}
                     {!title && (

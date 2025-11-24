@@ -103,9 +103,8 @@ body {
 
 
 .header-topic { flex-basis: 60%; padding-right: 20px; }
-.header-author { flex-basis: 15%; text-align: right; }
-.header-replies { flex-basis: 15%; text-align: right; }
-.header-activity { flex-basis: 10%; text-align: right; }
+.header-author { flex-basis: 40%; text-align: right; }
+
 
 
 

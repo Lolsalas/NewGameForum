@@ -108,8 +108,12 @@ function SideBar(){
                 position: 'fixed',
                 left: 10,
                 top: '50%',
-                transform: 'translateY(-50%)',
+                transform: 'translateY(50%)',
                 zIndex: 1000,
+                backgroundColor:'white',  
+                '&:hover': {
+                  backgroundColor:'white'
+                },
             }}>
           <MenuIcon></MenuIcon>
         </IconButton>

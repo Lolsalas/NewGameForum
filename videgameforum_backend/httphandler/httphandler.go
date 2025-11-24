@@ -578,3 +578,25 @@ func (h *handler) UpdateProfile(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"message": "Perfil actualizado con éxito"})
 }
+
+func (h *handler) GetCommentCount(c *gin.Context) {
+	postIDStr := c.Param("Post_ID")
+	postID, err := strconv.Atoi(postIDStr)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID de post inválido"})
+		return
+	}
+
+	commentCount, err := h.db_manager.CountCommentsByPostID(postID)
+
+	if err != nil {
+
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Fallo al obtener el conteo de comentarios"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"total_comments": commentCount, // El resultado es solo un número
+	})
+}

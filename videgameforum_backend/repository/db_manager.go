@@ -201,3 +201,17 @@ func (db *DBManager) GetUserById(userID int) (models.User, error) {
 	return user, nil
 
 }
+
+// repository/db_manager.go
+
+func (db *DBManager) CountCommentsByPostID(postID int) (int64, error) {
+	var count int64
+
+	result := db.Orm.Model(&models.Post_Comment{}).
+		Where("post_id = ?", postID).
+		Count(&count)
+	if result.Error != nil {
+		return 0, result.Error
+	}
+	return count, nil
+}
