@@ -9,12 +9,18 @@ export interface PostElements{
     text:string,
     forum_id:number,
     author:string
+    authorProfilePictureURL:string
 
 }
 
-function PostElement({author,date,text,title,forum_id,post_id}:PostElements)
+function PostElement({author,date,text,title,forum_id,post_id,authorProfilePictureURL}:PostElements)
 {
+
+    const profileImageUrl = `http://localhost:8081${authorProfilePictureURL}`;
+
     return (
+
+        
         <div className="PostCard main-post">
             
             {/* Contenedor del Título y el Cuerpo */}
@@ -25,9 +31,19 @@ function PostElement({author,date,text,title,forum_id,post_id}:PostElements)
                     <h1>{title}</h1>
                 </div>
                 
-                {/* 2. Información Meta (Autor y Fecha) */}
                 <div className="PostMeta">
-                    <span className="PostAuthor">Posted by: {author}</span>
+                    <div className="AuthorInfo">
+                        
+                        {authorProfilePictureURL && (
+                            <img
+                                src={profileImageUrl}
+                                alt={`Foto de perfil de ${author}`}
+                                className="ProfilePictureSmall"
+                            />
+                        )}
+
+                        <span className="PostAuthor">Posted by: **{author}**</span>
+                    </div>
                     <span className="PostDate"> on {date}</span>
                 </div>
                 

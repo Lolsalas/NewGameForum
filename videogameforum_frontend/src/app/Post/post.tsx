@@ -14,6 +14,7 @@ interface Props{
 interface User{
   Users_id:number;
   Username:string;
+  ProfilePictureURL:string;
 }
 
 interface Post {
@@ -75,7 +76,7 @@ function Post()
     <div>
         <div className='Post'>
             <div className="PostCard">
-                <PostElement text={Post?.Post_Text ?? "Desconocido"} date={Post?.Post_Date ?? "Desconocido"} title={Post?.Post_Title ?? "Desconocido"} forum_id={Post?.Forum_ID ?? -1} author={Post?.User.Username??"Desconocido"} post_id={Post?.Post_ID?? -1}></PostElement>
+                <PostElement text={Post?.Post_Text ?? "Desconocido"} date={Post?.Post_Date ?? "Desconocido"} title={Post?.Post_Title ?? "Desconocido"} forum_id={Post?.Forum_ID ?? -1} author={Post?.User.Username??"Desconocido"} post_id={Post?.Post_ID?? -1} authorProfilePictureURL={Post?.User.ProfilePictureURL??"Desconocido"}></PostElement>
             </div>
         </div>
     </div>
