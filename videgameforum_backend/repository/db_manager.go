@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -106,4 +107,38 @@ func (db *DBManager) GetForums() ([]models.Forum, error) {
 		return nil, result.Error
 	}
 	return Forums, nil
+}
+
+func (db *DBManager) PinForum(userid int, forumid int) error {
+	var user models.User
+	var forum models.Forum
+
+	var count int64
+
+	resultForum := db.Orm.Where("forum_id = ?", forumid).First(&forum)
+
+	if resultForum.Error != nil {
+		return resultForum.Error
+	}
+
+	db.Orm.First(&user, userid)
+
+	db.Orm.Table("pinnedforums").Where("users_id = ? AND forum_id = ?", userid, forumid).Count(&count)
+
+	if count > 0 {
+		return fmt.Errorf("el foro ya habia sido pinneado por este usuario")
+	}
+
+	err := db.Orm.Model(&user).Association("PinnedForums").Append(&forum)
+
+	return err
+}
+
+func (db *DBManager) GetPinnedForums(user_id int) ([]models.Forum, error) {
+	var user models.User
+	result := db.Orm.Preload("PinnedForums").First(&user, user_id)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return user.PinnedForums, nil
 }

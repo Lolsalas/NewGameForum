@@ -341,3 +341,122 @@ func (h *handler) GetForums(c *gin.Context) {
 	}
 	c.IndentedJSON(http.StatusOK, Forums)
 }
+
+func (h *handler) PinForum(c *gin.Context) {
+	tokenString := c.GetHeader("Authorization")
+
+	if tokenString == "" || !strings.HasPrefix(tokenString, "Bearer") {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token de Autorizacion requerido"})
+		c.Abort()
+		return
+	}
+
+	tokenString = strings.TrimPrefix(tokenString, "Bearer ")
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Metodo de firma inesperado", token.Header["alg"])
+		}
+		return jwtsecret, nil
+	})
+
+	if err != nil || !token.Valid {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token invalido o expirado"})
+		c.Abort()
+		return
+	}
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		if userIDFloat, ok := claims["user_id"].(float64); ok {
+			userID := int(userIDFloat)
+			c.Set("userID", userID)
+		}
+	}
+
+	userID, exists := c.Get("userID")
+
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuario no encontrado en el contexto."})
+		return
+	}
+
+	FinalUserID, ok := userID.(int)
+	if !ok {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error de ID"})
+	}
+
+	var requestBody struct {
+		Forum_id int `json:"forumid"`
+	}
+
+	if err := c.ShouldBindJSON(&requestBody); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Datos de foro no válidos: " + err.Error()})
+		return
+	}
+
+	err = h.db_manager.PinForum(FinalUserID, requestBody.Forum_id)
+	if err != nil {
+		if strings.Contains(err.Error(), "ya ha sido pinneado") {
+			c.JSON(http.StatusConflict, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error al pinnear el foro: " + err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{"message": "Foro pinneado correctamente"})
+
+}
+
+func (h *handler) GetPinnedForums(c *gin.Context) {
+	tokenString := c.GetHeader("Authorization")
+
+	if tokenString == "" || !strings.HasPrefix(tokenString, "Bearer") {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token de Autorizacion requerido"})
+		c.Abort()
+		return
+	}
+
+	tokenString = strings.TrimPrefix(tokenString, "Bearer ")
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Metodo de firma inesperado", token.Header["alg"])
+		}
+		return jwtsecret, nil
+	})
+
+	if err != nil || !token.Valid {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token invalido o expirado"})
+		c.Abort()
+		return
+	}
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		if userIDFloat, ok := claims["user_id"].(float64); ok {
+			userID := int(userIDFloat)
+			c.Set("userID", userID)
+		}
+	}
+
+	userID, exists := c.Get("userID")
+
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuario no encontrado en el contexto."})
+		return
+	}
+
+	FinalUserID, ok := userID.(int)
+	if !ok {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error de ID"})
+	}
+
+	pinnedForums, err := h.db_manager.GetPinnedForums(FinalUserID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+		return
+	}
+
+	c.IndentedJSON(http.StatusOK, pinnedForums)
+
+}

@@ -6,7 +6,7 @@ import './MainMenu.css'
 
 interface Forums{
     Forum_Name:  string
-	Forum_ID :   number    
+	  Forum_ID :   number    
 }
 
 function MainMenu()

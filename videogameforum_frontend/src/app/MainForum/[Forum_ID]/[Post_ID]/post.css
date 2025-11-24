@@ -57,3 +57,50 @@
     line-height: 1.8;
     margin: 0;
 }
+
+.PostActions {
+    /* Contenedor de las acciones. Lo centramos y separamos del texto. */
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color); /* Separador sutil */
+    text-align: right; /* Alinea el botón a la derecha */
+}
+
+.CommentButton, .PinButton {
+    /* Estilos base del botón */
+    background-color: var(--highlight-color, #007bff); /* Usa la variable o un color por defecto */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    
+    /* Pequeña sombra para darle relieve */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.PinButton:hover {
+    /* Efecto al pasar el ratón */
+    background-color: color-mix(in srgb, var(--highlight-color, #007bff) 80%, black); /* Oscurece el color un poco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.PinButton:active {
+    /* Efecto al hacer clic */
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.CommentButton:hover {
+    /* Efecto al pasar el ratón */
+    background-color: color-mix(in srgb, var(--highlight-color, #007bff) 80%, black); /* Oscurece el color un poco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.CommentButton:active {
+    /* Efecto al hacer clic */
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}

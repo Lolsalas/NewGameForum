@@ -5,6 +5,8 @@ import { Threads } from "./MainForumElements";
 import './MainForum.css'
 import { useParams } from "next/navigation";
 import { useEffect,useState } from "react";
+import Link from "next/link";
+import Button from "@mui/material/Button";
 
 interface User{
   Users_id:number;
@@ -31,13 +33,23 @@ interface ForumType {
 function MainForum()
 {
 
-      const { Forum_ID } = useParams<{ Forum_ID: string }>();
-  const [Forum, setForum] = useState<ForumType | null>(null);
-  const [loading, setLoading] = useState(true);
+const [showLoginPopup, setShowLoginPopup] = useState(false);
+const { Forum_ID } = useParams<{ Forum_ID: string }>();
+const [Forum, setForum] = useState<ForumType | null>(null);
+const [loading, setLoading] = useState(true);
+const createPostLink = `/MainForum/${Forum_ID}/CreatePost`;
+
+  const authToken=localStorage.getItem("authToken")
+    if(!authToken){
+      console.error("Usuario no encontrado")
+      setShowLoginPopup(true)
+        return
+        } 
+
 
   useEffect(() => {
     const fetchForum = async () => {
-      console.log("ID recibido desde la URL:", Forum_ID); // Depuración
+      console.log("ID recibido desde la URL:", Forum_ID);
 
       if (!Forum_ID) {
         console.error("No se recibió un ID válido");
@@ -48,7 +60,7 @@ function MainForum()
       try {
         const res = await fetch(`http://localhost:8081/forum/${Forum_ID}`);
         const data = await res.json();
-        console.log("Respuesta del backend:", data); // Depuración
+        console.log("Respuesta del backend:", data)
 
         if (res.ok) {
           if (data.forum) {
@@ -75,25 +87,47 @@ function MainForum()
             <div className="MainForum">
                 <SideBar></SideBar>
                 <div className="MainForumCard">
-                    {/* {items.map((item,index)=>
-                    (
-                        <MainForumElements key={index} id={item.id} title={item.title} author={item.author} date={item.date} replies={item.replies}></MainForumElements>
-                    ))} */}
-                    {Forum?.Forum_Posts && Forum.Forum_Posts.length>0 ? (
+                  <div className="main-actions">
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        component={Link} 
+                        href={createPostLink}
+                        className="create-post-button"
+                    >
+                        Create Post
+                    </Button>
+                </div>
+                   {Forum?.Forum_Posts && Forum.Forum_Posts.length>0 ? (
+
                         Forum.Forum_Posts.map((post,index)=>(
+
                             <MainForumElements
+
                             key={index}
+
                             id={post.Forum_ID}
+
                             author={post.User?.Username?? "Unknown"}
+
                             date="dasdsa"
+
                             replies="sdads"
+
                             title={post.Post_Title}
+
                             postid={post.Post_ID}>
+
                             </MainForumElements>
+
                         ))
+
                     ):(
+
                         <p>No posts yet</p>
-                    )}
+
+                    )
+                  }
                 </div>
             </div>
         </div>

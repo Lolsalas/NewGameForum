@@ -54,12 +54,12 @@ function Login(){
                 
                 <div className="LoginInput form-group">
                     <label className="Icon" htmlFor="email">👤</label>
-                    <input type="email" name="Email" id="email" placeholder="Email or Phone" required/>
+                    <input type="email" name="Email" id="email" placeholder="Email or Phone" required onChange={(e)=>setEmail(e.target.value)}/>
                 </div>
                 
                 <div className="LoginInput form-group">
                     <label className="Icon" htmlFor="pword">🔒</label>
-                    <input type="password" name="Password" id="pword" placeholder="Password" required/>
+                    <input type="password" name="Password" id="pword" placeholder="Password" required onChange={(e)=>setPassword(e.target.value)}/>
                 </div>
                 
                 <button className="LoginButton" type="submit">Login</button>

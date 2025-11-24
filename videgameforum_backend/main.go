@@ -55,6 +55,8 @@ func main() {
 	router.GET("/forum/:Forum_ID/:Post_ID", hdlr.GetPost)
 	router.GET("/forum/:Forum_ID/:Post_ID/comments", hdlr.GetComments)
 	router.POST("/forum/:Forum_ID/:Post_ID/postcomment", hdlr.InsertComment)
+	router.POST("/forum/:Forum_ID/pincomment", hdlr.PinForum)
 	router.GET("/forum", hdlr.GetForums)
+	router.GET("/forum/pinnedcomments", hdlr.GetPinnedForums)
 	router.Run("0.0.0.0:8081")
 }

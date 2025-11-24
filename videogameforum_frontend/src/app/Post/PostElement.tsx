@@ -28,6 +28,11 @@ function PostElement({author,date,text,title}:PostElements)
                 <div className="PostText">
                     <p>{text}</p>
                 </div>
+                <div className="PostActions">
+                    <button className="PinButton">
+                        Pin Forum
+                    </button>
+                </div>
             </div>
 
         </div>

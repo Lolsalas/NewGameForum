@@ -18,11 +18,17 @@ function SideBar(){
 
   const drawerContent=(
     <List>
-      <ListItemButton><ListItemText primary="Inicio" /></ListItemButton>
-      <ListItemButton><ListItemText primary="Foros" /></ListItemButton>
-      <ListItemButton>
-        <Link href='/CreateForum'>Create a Forum</Link>
-        </ListItemButton>
+      <Link href='/'>
+      <ListItemButton sx={{mb:5,mt:5}}>
+        <ListItemText primary="Inicio" />
+      </ListItemButton>
+      </Link>
+      <ListItemButton sx={{mb:5,mt:5}}><ListItemText primary="Foros" /></ListItemButton>
+      <Link href='/CreateForum'>
+      <ListItemButton sx={{mb:5,mt:5}}>
+        <ListItemText primary="Create a Forum"/>
+      </ListItemButton>
+      </Link>
     </List>
   )
   return(
