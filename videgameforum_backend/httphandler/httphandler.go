@@ -367,7 +367,7 @@ func (h *handler) InsertComment(c *gin.Context) {
 		return
 	}
 
-	err = h.db_manager.InsertComment(FinalUsername, new_comment.Comment_Text, new_comment.Comment_Date, new_comment.Forum_ID, new_comment.Post_ID)
+	err = h.db_manager.InsertComment(FinalUsername, new_comment.Comment_Text, new_comment.Comment_Date, new_comment.Forum_ID, new_comment.Post_ID, FinalUserID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

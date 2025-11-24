@@ -7,14 +7,21 @@ import { useEffect,useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 
+interface User{
+  Users_id:number;
+  Username:string;
+  ProfilePictureURL:string;
+}
+
 interface Test {
 	Comment_Date : string
 	Comment_Text : string
 	Forum_ID     :number 
 	Post_ID      :number 
-	Users_ID     :number 
+	Users_ID     :string 
 	Comment_ID   :number
   Username:string
+  User: User;
 }
 
 function CreateComment(){
@@ -66,7 +73,8 @@ function CreateComment(){
                     key={index}
                     User={post.Username}
                     Comment_Date={post.Comment_Date}
-                    Comment_Text={post.Comment_Text}></CreateCommentElements>
+                    Comment_Text={post.Comment_Text}
+                    UserProfilePictureURL={post.User.ProfilePictureURL}></CreateCommentElements>
                 ))}
             </div>
         </div>

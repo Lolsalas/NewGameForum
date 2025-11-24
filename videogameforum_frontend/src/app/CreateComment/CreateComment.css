@@ -4,35 +4,32 @@
 }
 
 .CreateCommentCard{
-    display: flex; /* Divide la tarjeta en dos secciones (Meta y Cuerpo) */
+    display: flex; 
     margin: 15px 0;
     border-radius: 6px;
-    overflow: hidden; /* Asegura que los bordes redondeados se apliquen correctamente */
+    overflow: hidden; 
     border: 1px solid var(--border-color);
     background-color: var(--comment-bg);
     flex-direction: column;
 }
-/* --- Variables de Modo Oscuro (Reutilizadas) --- */
+
 :root {
-    --comment-bg: #2c2f33;       /* Fondo ligeramente más claro que el post principal */
+    --comment-bg: #2c2f33;       
     --primary-text: #f6f6f6;
     --secondary-text: #999999;
     --border-color: #3e4146;
     --highlight-color: #ffc107;
-    --meta-panel-bg: #212121;    /* Fondo oscuro para el panel de usuario */
+    --meta-panel-bg: #212121;    
 }
 
 
-/* --- Columna 1: Panel de Usuario/Metadata (Fijo) --- */
 .CommentMetaPanel {
-    /* Ancho fijo para la columna del autor/fecha */
     width: 150px; 
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    /* Separador y fondo */
     border-right: 1px solid var(--border-color); 
     background-color: var(--meta-panel-bg); 
 }
@@ -48,7 +45,6 @@
     font-size: 0.75em;
 }
 
-/* --- Columna 2: Cuerpo del Comentario (Flexible) --- */
 .CommentBody {
     flex-grow: 1;
     padding: 15px 20px;
@@ -59,10 +55,27 @@
     font-size: 1em;
     line-height: 1.5;
     margin: 0;
-    white-space: pre-wrap; /* Respeta saltos de línea */
+    white-space: pre-wrap; 
 }
 
 .CommentCard{
     border-bottom: 2px solid var(--highlight-color);
     padding: 20px;
+}
+
+.AuthorDisplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+.CommentAuthorPicture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 5px;
+    border: 2px solid var(--highlight-color); 
 }

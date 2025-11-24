@@ -83,16 +83,16 @@ func (db *DBManager) GetUser(id int) (*models.User, error) {
 
 func (db *DBManager) GetComments(Post_ID int) ([]models.Post_Comment, error) {
 	var Comments []models.Post_Comment
-	result := db.Orm.Where("post_id = ?", Post_ID).Find(&Comments)
+	result := db.Orm.Where("post_id = ?", Post_ID).Preload("User").Find(&Comments)
 	if result.Error != nil {
 		return nil, result.Error
 	}
 	return Comments, nil
 }
 
-func (db *DBManager) InsertComment(user string, commenttext string, commentdate time.Time, forumid int, postid int) error {
+func (db *DBManager) InsertComment(user string, commenttext string, commentdate time.Time, forumid int, postid int, userid int) error {
 
-	comments := models.Post_Comment{Username: user, Comment_Date: commentdate, Comment_Text: commenttext, Forum_ID: forumid, Post_ID: postid}
+	comments := models.Post_Comment{Username: user, Comment_Date: commentdate, Comment_Text: commenttext, Forum_ID: forumid, Post_ID: postid, Users_ID: userid}
 	result := db.Orm.Create(&comments)
 	if result.Error != nil {
 		return result.Error
