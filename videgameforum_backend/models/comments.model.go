@@ -10,5 +10,7 @@ type Post_Comment struct {
 	Forum_ID     int `gorm:"foreignKey:Forum_ID"`
 	Post_ID      int `gorm:"foreignKey:Post_ID"`
 	Users_ID     int `gorm:"foreignKey:Users_ID"`
-	Comment_ID   int `gorm:"primaryKey;autoIncrement"`
+	Username     string
+	Comment_ID   int  `gorm:"primaryKey;autoIncrement"`
+	User         User `gorm:"foreignKey:Users_ID"`
 }

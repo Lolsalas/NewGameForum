@@ -14,6 +14,7 @@ interface Test {
 	Post_ID      :number 
 	Users_ID     :number 
 	Comment_ID   :number
+  Username:string
 }
 
 function CreateComment(){
@@ -63,7 +64,7 @@ function CreateComment(){
                 {comments.map((post,index)=>(
                     <CreateCommentElements
                     key={index}
-                    User={post.Users_ID}
+                    User={post.Username}
                     Comment_Date={post.Comment_Date}
                     Comment_Text={post.Comment_Text}></CreateCommentElements>
                 ))}

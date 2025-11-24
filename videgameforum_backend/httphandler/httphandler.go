@@ -131,8 +131,9 @@ func (h *handler) Login(c *gin.Context) {
 	}
 
 	claims := jwt.MapClaims{
-		"user_id": user.ID,
-		"exp":     time.Now().Add(time.Hour * 24 * 7).Unix(),
+		"user_id":  user.ID,
+		"exp":      time.Now().Add(time.Hour * 24 * 7).Unix(),
+		"username": user.Username,
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -303,9 +304,20 @@ func (h *handler) InsertComment(c *gin.Context) {
 			userID := int(userIDFloat)
 			c.Set("userID", userID)
 		}
+
+		if username, ok := claims["username"].(string); ok {
+			c.Set("username", username)
+		}
 	}
 
 	userID, exists := c.Get("userID")
+
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuario no encontrado en el contexto."})
+		return
+	}
+
+	username, exists := c.Get("username")
 
 	if !exists {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuario no encontrado en el contexto."})
@@ -317,6 +329,13 @@ func (h *handler) InsertComment(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error de ID"})
 	}
 
+	FinalUsername, ok := username.(string)
+	if !ok {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error de username"})
+	}
+
+	print(FinalUserID)
+
 	var new_comment models.Post_Comment
 
 	if err := c.ShouldBindJSON(&new_comment); err != nil {
@@ -324,7 +343,7 @@ func (h *handler) InsertComment(c *gin.Context) {
 		return
 	}
 
-	err = h.db_manager.InsertComment(FinalUserID, new_comment.Comment_Text, new_comment.Comment_Date, new_comment.Forum_ID, new_comment.Post_ID)
+	err = h.db_manager.InsertComment(FinalUsername, new_comment.Comment_Text, new_comment.Comment_Date, new_comment.Forum_ID, new_comment.Post_ID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

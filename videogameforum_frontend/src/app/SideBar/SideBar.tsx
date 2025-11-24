@@ -23,7 +23,9 @@ function SideBar(){
         <ListItemText primary="Inicio" />
       </ListItemButton>
       </Link>
-      <ListItemButton sx={{mb:5,mt:5}}><ListItemText primary="Foros" /></ListItemButton>
+      <Link href='/PinnedForums'>
+      <ListItemButton sx={{mb:5,mt:5}}><ListItemText primary="Pinned Forums" /></ListItemButton>
+      </Link>
       <Link href='/CreateForum'>
       <ListItemButton sx={{mb:5,mt:5}}>
         <ListItemText primary="Create a Forum"/>

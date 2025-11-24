@@ -8,6 +8,8 @@ import { useEffect,useState } from "react";
 import Link from "next/link";
 import Button from "@mui/material/Button";
 
+import '../PopUp/PopUp.css'
+
 interface User{
   Users_id:number;
   Username:string;
@@ -38,13 +40,6 @@ const { Forum_ID } = useParams<{ Forum_ID: string }>();
 const [Forum, setForum] = useState<ForumType | null>(null);
 const [loading, setLoading] = useState(true);
 const createPostLink = `/MainForum/${Forum_ID}/CreatePost`;
-
-  const authToken=localStorage.getItem("authToken")
-    if(!authToken){
-      console.error("Usuario no encontrado")
-      setShowLoginPopup(true)
-        return
-        } 
 
 
   useEffect(() => {

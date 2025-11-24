@@ -30,7 +30,7 @@ function Login(){
     if(res.ok){
       if(data.token){
       localStorage.setItem('authToken',data.token)
-      router.push("/CreateForum")
+      router.push("/ ")
     }
     else{
       console.error('No se devolvio el token')

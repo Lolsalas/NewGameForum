@@ -1,11 +1,18 @@
+'use client'
+
+import Link from "next/link";
+
 export interface PostElements{
     title:string
-    author:string,
+    post_id:number,
     date:string,
     text:string,
+    forum_id:number,
+    author:string
+
 }
 
-function PostElement({author,date,text,title}:PostElements)
+function PostElement({author,date,text,title,forum_id,post_id}:PostElements)
 {
     return (
         <div className="PostCard main-post">
@@ -29,10 +36,14 @@ function PostElement({author,date,text,title}:PostElements)
                     <p>{text}</p>
                 </div>
                 <div className="PostActions">
-                    <button className="PinButton">
-                        Pin Forum
+
+                    <Link href={`/MainForum/${forum_id}/${post_id}/PostComment`}>
+                    <button className="CommentButton">
+                        Comment
                     </button>
+                    </Link>
                 </div>
+
             </div>
 
         </div>

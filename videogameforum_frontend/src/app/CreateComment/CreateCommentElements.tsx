@@ -4,7 +4,7 @@ import SideBar from "../SideBar/SideBar";
 export interface elements{
     Comment_Date:string,
     Comment_Text: string,
-    User:number
+    User:string
 }
 
 function CreateCommentElements({Comment_Date,Comment_Text,User}:elements){

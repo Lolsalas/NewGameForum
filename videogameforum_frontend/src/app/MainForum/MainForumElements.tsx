@@ -89,7 +89,7 @@ function MainForumElements({ id, title, author, date, replies, postid }: Threads
         console.error("Fetch falló:", err);
       } finally {
         setLoading(false);
-      }
+      [loading]}
 
     }
 

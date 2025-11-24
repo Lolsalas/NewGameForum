@@ -22,7 +22,7 @@ function CreateAccount() {
       });
 
       if (res.ok) {
-        router.push("/"); // redirige al root
+        router.push("/Login");
       } else {
         console.error("Error creando cuenta");
       }
@@ -34,19 +34,15 @@ function CreateAccount() {
     return(
        <div className="post-page-wrapper"> 
             <TopBar></TopBar>
-            
-            {/* CreateAccount.Layout: Contenedor de dos columnas */}
+          
             <div className="CreateAccount Layout">
-                <SideBar></SideBar> {/* La SideBar se queda */}
-                
-                {/* CreateAccountCard.content-card: El contenido principal */}
+
                 <div className="CreateAccountCard content-card">
                     
-                    <form onSubmit={handleSubmit} className="account-form"> {/* Clase específica para el formulario */}
+                    <form onSubmit={handleSubmit} className="account-form">
                         
-                        <h2 className="section-title">Crear tu cuenta</h2> {/* Título estilizado */}
+                        <h2 className="section-title">Crear tu cuenta</h2> 
                         
-                        {/* Campo Email */}
                         <div className="form-group">
                             <label className="form-label" htmlFor="email">Email</label>
                             <div className="LoginInput create-input-box">
@@ -54,7 +50,6 @@ function CreateAccount() {
                             </div>
                         </div>
                         
-                        {/* Campo Nombre de Usuario */}
                         <div className="form-group">
                             <label className="form-label" htmlFor="uname">Nombre de Usuario</label>
                             <div className="LoginInput create-input-box">
@@ -62,7 +57,6 @@ function CreateAccount() {
                             </div>
                         </div>
                         
-                        {/* Campo Contraseña */}
                         <div className="form-group">
                             <label className="form-label" htmlFor="pword">Contraseña</label>
                             <div className="LoginInput create-input-box">
@@ -76,7 +70,6 @@ function CreateAccount() {
                         
                     </form>
                     
-                    {/* Enlace a Login */}
                     <p className="link-text">
                         ¿Ya tienes cuenta? <a href="/login" className="register-link">Inicia Sesión</a>
                     </p>

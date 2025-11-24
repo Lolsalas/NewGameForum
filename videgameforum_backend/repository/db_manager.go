@@ -90,9 +90,9 @@ func (db *DBManager) GetComments(Post_ID int) ([]models.Post_Comment, error) {
 	return Comments, nil
 }
 
-func (db *DBManager) InsertComment(userid int, commenttext string, commentdate time.Time, forumid int, postid int) error {
+func (db *DBManager) InsertComment(user string, commenttext string, commentdate time.Time, forumid int, postid int) error {
 
-	comments := models.Post_Comment{Users_ID: userid, Comment_Date: commentdate, Comment_Text: commenttext, Forum_ID: forumid, Post_ID: postid}
+	comments := models.Post_Comment{Username: user, Comment_Date: commentdate, Comment_Text: commenttext, Forum_ID: forumid, Post_ID: postid}
 	result := db.Orm.Create(&comments)
 	if result.Error != nil {
 		return result.Error

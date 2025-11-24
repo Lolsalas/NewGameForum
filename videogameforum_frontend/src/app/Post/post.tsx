@@ -67,7 +67,7 @@ function Post()
     };
 
     fetchPost();
-  }, [Forum_ID,Post_ID]);
+  }, [Forum_ID]);
 
 
 
@@ -75,7 +75,7 @@ function Post()
     <div>
         <div className='Post'>
             <div className="PostCard">
-                <PostElement author={Post?.User?.Username ?? "Desconocido"} text={Post?.Post_Text ?? "Desconocido"} date={Post?.Post_Date ?? "Desconocido"} title={Post?.Post_Title ?? "Desconocido"}></PostElement>
+                <PostElement text={Post?.Post_Text ?? "Desconocido"} date={Post?.Post_Date ?? "Desconocido"} title={Post?.Post_Title ?? "Desconocido"} forum_id={Post?.Forum_ID ?? -1} author={Post?.User.Username??"Desconocido"} post_id={Post?.Post_ID?? -1}></PostElement>
             </div>
         </div>
     </div>
