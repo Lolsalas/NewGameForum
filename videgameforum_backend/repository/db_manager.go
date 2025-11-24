@@ -142,3 +142,46 @@ func (db *DBManager) GetPinnedForums(user_id int) ([]models.Forum, error) {
 	}
 	return user.PinnedForums, nil
 }
+
+func (db *DBManager) UpdateUserDB(userID int, username, title, pictureURL string) error {
+	updates := make(map[string]interface{})
+
+	if username != "" {
+		updates["Username"] = username
+	}
+	if title != "" {
+		updates["Title"] = title
+	}
+
+	if pictureURL != "" {
+		updates["ProfilePictureURL"] = pictureURL
+	}
+
+	if len(updates) == 0 {
+		return nil
+	}
+
+	result := db.Orm.Model(&models.User{}).Where("users_id = ?", userID).Updates(updates)
+
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
+func (db *DBManager) GetUserById(userID int) (models.User, error) {
+
+	var user models.User
+
+	result := db.Orm.Where("users_id = ?", userID).First(&user)
+
+	if result.Error != nil {
+		if result.Error == gorm.ErrRecordNotFound {
+			return models.User{}, result.Error
+		}
+		return models.User{}, result.Error
+	}
+
+	return user, nil
+
+}

@@ -18,6 +18,8 @@ services:
   backend:
     build: ./videgameforum_backend
     container_name: go_backend
+    volumes:
+      - ./static/profiles:/app/static/profiles
     ports:
       - "8081:8081"
     environment:

@@ -37,6 +37,7 @@ func main() {
 	}
 
 	router := gin.Default()
+	router.Static("/profiles", "./static/profiles")
 
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://frontend:3000", "https://frontend:3001", "http://localhost:3000"}, // tu frontend
@@ -57,6 +58,8 @@ func main() {
 	router.POST("/forum/:Forum_ID/:Post_ID/postcomment", hdlr.InsertComment)
 	router.POST("/forum/:Forum_ID/pincomment", hdlr.PinForum)
 	router.GET("/forum", hdlr.GetForums)
-	router.GET("/forum/pinnedcomments", hdlr.GetPinnedForums)
+	router.POST("/forum/pinnedcomments", hdlr.GetPinnedForums)
+	router.GET("/forum/profile", hdlr.GetCurrentUser)
+	router.POST("/forum/profile/update", hdlr.UpdateProfile)
 	router.Run("0.0.0.0:8081")
 }

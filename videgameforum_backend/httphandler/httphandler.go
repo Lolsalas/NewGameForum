@@ -176,25 +176,49 @@ func (h *handler) GetPost(c *gin.Context) {
 }
 
 func (h *handler) GetCurrentUser(c *gin.Context) {
-	session, err := h.store.Get(c.Request, "session")
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "No se pudo obtener la sesion"})
+	tokenString := c.GetHeader("Authorization")
+
+	if tokenString == "" || !strings.HasPrefix(tokenString, "Bearer") {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token de Autorizacion requerido"})
+		c.Abort()
 		return
 	}
 
-	auth, ok := session.Values["authenticated"].(bool)
-	if !ok || !auth {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "usuario no encontrado"})
+	tokenString = strings.TrimPrefix(tokenString, "Bearer ")
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Metodo de firma inesperado", token.Header["alg"])
+		}
+		return jwtsecret, nil
+	})
+
+	if err != nil || !token.Valid {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token invalido o expirado"})
+		c.Abort()
 		return
 	}
 
-	userID, ok := session.Values["user_id"].(int)
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		if userIDFloat, ok := claims["user_id"].(float64); ok {
+			userID := int(userIDFloat)
+			c.Set("userID", userID)
+		}
+	}
+
+	userID, exists := c.Get("userID")
+
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuario no encontrado en el contexto."})
+		return
+	}
+
+	FinalUserID, ok := userID.(int)
 	if !ok {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "usuario no encontrado en la sesion"})
-		return
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error de ID"})
 	}
 
-	user, err := h.db_manager.GetUser(userID)
+	user, err := h.db_manager.GetUser(FinalUserID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Usuario no encontrado"})
 		return
@@ -478,4 +502,75 @@ func (h *handler) GetPinnedForums(c *gin.Context) {
 
 	c.IndentedJSON(http.StatusOK, pinnedForums)
 
+}
+
+func (h *handler) UpdateProfile(c *gin.Context) {
+
+	tokenString := c.GetHeader("Authorization")
+
+	if tokenString == "" || !strings.HasPrefix(tokenString, "Bearer") {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token de Autorizacion requerido"})
+		c.Abort()
+		return
+	}
+
+	tokenString = strings.TrimPrefix(tokenString, "Bearer ")
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Metodo de firma inesperado", token.Header["alg"])
+		}
+		return jwtsecret, nil
+	})
+
+	if err != nil || !token.Valid {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Token invalido o expirado"})
+		c.Abort()
+		return
+	}
+
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		if userIDFloat, ok := claims["user_id"].(float64); ok {
+			userID := int(userIDFloat)
+			c.Set("userID", userID)
+		}
+	}
+
+	userID, exists := c.Get("userID")
+
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuario no encontrado en el contexto."})
+		return
+	}
+
+	FinalUserID, ok := userID.(int)
+	if !ok {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error de ID"})
+	}
+
+	newUsername := c.PostForm("Username")
+	newTitle := c.PostForm("Title")
+
+	file, errFile := c.FormFile("profile_picture")
+	var publicURL string = ""
+
+	if errFile == nil {
+
+		filename := fmt.Sprintf("%d_%s", FinalUserID, file.Filename)
+		destination := "./static/profiles/" + filename
+
+		if err := c.SaveUploadedFile(file, destination); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "falló al guardar la imagen"})
+			return
+		}
+
+		publicURL = fmt.Sprintf("/profiles/%s", filename)
+	}
+
+	if err := h.db_manager.UpdateUserDB(FinalUserID, newUsername, newTitle, publicURL); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "falló al actualizar la base de datos: " + err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Perfil actualizado con éxito"})
 }
