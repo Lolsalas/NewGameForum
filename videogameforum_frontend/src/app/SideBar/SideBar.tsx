@@ -5,14 +5,61 @@ import { Box, Drawer, IconButton, List, ListItem, ListItemText, useMediaQuery,Bu
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import './SideBar.css'
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+
+
 
 function SideBar(){
+
+
 
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
+
+  const router = useRouter(); 
+    
+    const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+    const handleHomeClick = () => {
+        setShowLoginPopup(false); 
+        router.push('/'); 
+    };
+
+    const handleUpdate = () => {
+        const authToken=localStorage.getItem("authToken")
+        if(!authToken){
+            console.error("Usuario no encontrado")
+            setShowLoginPopup(true)
+        } 
+        else {
+            router.push('/UpdateProfile');
+        } 
+    };
+        const handleCreate = () => {
+        const authToken=localStorage.getItem("authToken")
+        if(!authToken){
+            console.error("Usuario no encontrado")
+            setShowLoginPopup(true)
+        } 
+        else {
+            router.push('/CreateForum');
+        } 
+    };
+        const handlePinned = () => {
+        const authToken=localStorage.getItem("authToken")
+        if(!authToken){
+            console.error("Usuario no encontrado")
+            setShowLoginPopup(true)
+        } 
+        else {
+            router.push('/PinnedForums');
+        } 
+    };
 
   const isDesktop = useMediaQuery("(min-width:900px)");
 
@@ -23,22 +70,38 @@ function SideBar(){
         <ListItemText primary="Inicio" />
       </ListItemButton>
       </Link>
-      <Link href='/PinnedForums'>
-      <ListItemButton sx={{mb:5,mt:5}}><ListItemText primary="Pinned Forums" /></ListItemButton>
-      </Link>
-      <Link href='/CreateForum'>
-      <ListItemButton sx={{mb:5,mt:5}}>
+      <ListItemButton sx={{mb:5,mt:5}}  onClick={handlePinned}><ListItemText primary="Pinned Forums" /></ListItemButton>
+      <ListItemButton sx={{mb:5,mt:5}}  onClick={handleCreate}>
         <ListItemText primary="Create a Forum"/>
       </ListItemButton>
-      </Link>
-      <Link href='/UpdateProfile'>
-      <ListItemButton>
+
+      <ListItemButton onClick={handleUpdate}>
         <ListItemText primary="Edit Profile" />
       </ListItemButton>
-      </Link>
     </List>
   )
+
+
+      const PopUp=({onClose}:{onClose: ()=>void})=>{
+        return(
+            <div className="PopUpCard">
+                <div className="PopUpInfo">
+                    <h2>ALTO!!!</h2>
+                    <span>Necesitas iniciar sesion para tener acceso a esta funcion.</span>
+                    <div className="PopUpLink">
+                        <Link href="/Login">Pulsa aqui para ir a la pantalla de inicio de sesion.</Link>
+                    </div>
+                    <button onClick={handleHomeClick}>
+                        <Link href='/'>
+                            Pulsa aqui para volver al menu principal
+                        </Link>
+                    </button>
+                </div>
+            </div>
+        )
+    }
   return(
+    <>
     <div className="SideBar">
       {!isDesktop&& (
         <IconButton className="hamburger-button" onClick={toggleDrawer(true)} sx={{
@@ -63,6 +126,8 @@ function SideBar(){
       )}
 
     </div>
+    {showLoginPopup && <PopUp onClose={() => setShowLoginPopup(false)} />}
+    </>
   )
 
 }

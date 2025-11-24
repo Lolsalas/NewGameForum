@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 
 interface UserProfile {
     username: string;
@@ -9,8 +11,9 @@ interface UserProfile {
     ProfilePictureURL: string; 
 }
 
-function ProfileForm() {
+function ProfileForm() {    
 
+    const router=useRouter()
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [newUsername, setNewUsername] = useState('');
     const [newTitle, setNewTitle] = useState('');
@@ -97,6 +100,7 @@ function ProfileForm() {
 
             if (response.ok) {
                 alert('¡Perfil actualizado con éxito!');
+                router.push('/')
 
             } else {
                 const errorData = await response.json();

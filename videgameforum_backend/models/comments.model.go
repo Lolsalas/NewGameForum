@@ -1,11 +1,6 @@
 package models
 
-import (
-	"time"
-)
-
 type Post_Comment struct {
-	Comment_Date time.Time
 	Comment_Text string
 	Forum_ID     int `gorm:"foreignKey:Forum_ID"`
 	Post_ID      int `gorm:"foreignKey:Post_ID"`

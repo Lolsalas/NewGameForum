@@ -11,7 +11,6 @@ function CreateForum()
 {
     const [Forum_Name,setForumname]=useState("")
     const router=useRouter()
-    const [showLoginPopup, setShowLoginPopup] = useState(false);
 
     
     const handleSubmit=async(e: React.FormEvent)=>{
@@ -22,7 +21,6 @@ function CreateForum()
         if(!authToken)
         {
             console.error('Usuario no encontrado')
-            setShowLoginPopup(true)
             return
         }
 
@@ -42,26 +40,6 @@ function CreateForum()
             console.log("Error: ",data.error)
         }
     }
-
-        const PopUp=({onClose}:{onClose: ()=>void})=>{
-        return(
-            <div className="PopUpCard">
-                <div className="PopUpInfo">
-                    <h2>ALTO!!!</h2>
-                    <span>Necesitas iniciar sesion para tener acceso a esta funcion.</span>
-                    <div className="PopUpLink">
-                        <Link href="/Login">Pulsa aqui para ir a la pantalla de inicio de sesion.</Link>
-                    </div>
-                    <button>
-                        <Link href='/'>
-                            Pulsa aqui para volver al menu principal
-                        </Link>
-                    </button>
-                </div>
-            </div>
-        )
-    }
-
 
     return(
     <>
@@ -99,7 +77,6 @@ function CreateForum()
                 </div>
             </div>
         </div>
-    {showLoginPopup && <PopUp onClose={() => setShowLoginPopup(false)} />}
     </>
     )
 }

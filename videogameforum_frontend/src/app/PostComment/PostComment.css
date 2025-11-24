@@ -81,7 +81,7 @@
     font-weight: 700;
     font-size: 1em;
     cursor: pointer;
-    align-self: flex-end; /* Alinea el botón a la derecha */
+    align-self: flex-end; 
     transition: background-color 0.2s;
 }
 

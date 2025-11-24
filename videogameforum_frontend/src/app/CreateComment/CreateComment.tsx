@@ -33,7 +33,7 @@ function CreateComment(){
     
         useEffect(() => {
         const fetchPost = async () => {
-          console.log("ID recibido desde la URL:", Post_ID); // Depuración
+          console.log("ID recibido desde la URL:", Post_ID); 
     
           if (!Post_ID) {
             console.error("No se recibió un ID válido");
@@ -44,7 +44,7 @@ function CreateComment(){
           try {
             const res = await fetch(`http://localhost:8081/forum/${Forum_ID}/${Post_ID}/comments`);
             const data:Test[]=await res.json();
-            console.log("Respuesta del backend:", data); // Depuración
+            console.log("Respuesta del backend:", data);
     
             if (res.ok) {
                 setComments(data)
@@ -72,7 +72,6 @@ function CreateComment(){
                     <CreateCommentElements
                     key={index}
                     User={post.Username}
-                    Comment_Date={post.Comment_Date}
                     Comment_Text={post.Comment_Text}
                     UserProfilePictureURL={post.User.ProfilePictureURL}></CreateCommentElements>
                 ))}

@@ -7,7 +7,6 @@ import (
 type Post struct {
 	gorm.Model
 	Post_Text  string
-	Post_Date  string
 	Post_ID    int `gorm:"primaryKey;autoIncrement"`
 	Users_ID   int `gorm:"foreignKey:Users_ID"`
 	Post_Title string

@@ -14,7 +14,6 @@ function PinnedForums(){
 
   const[pinnedForum,setPinnedForum]=useState<Forums[]>([])
   const[loading,setLoading]=useState(true)
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   useEffect(()=>{
     const fetchPinned = async ()=>{
@@ -22,7 +21,6 @@ function PinnedForums(){
       
       if(!authToken){
         console.error("Usuario no encontrado")
-        setShowLoginPopup(true)
         return
       }
       try{
@@ -48,25 +46,6 @@ function PinnedForums(){
     fetchPinned()
   },[loading])
   
-      const PopUp=({onClose}:{onClose: ()=>void})=>{
-        return(
-            <div className="PopUpCard">
-                <div className="PopUpInfo">
-                    <h2>ALTO!!!</h2>
-                    <span>Necesitas iniciar sesion para tener acceso a esta funcion.</span>
-                    <div className="PopUpLink">
-                        <Link href="/Login">Pulsa aqui para ir a la pantalla de inicio de sesion.</Link>
-                    </div>
-                    <button>
-                        <Link href='/'>
-                            Pulsa aqui para volver al menu principal
-                        </Link>
-                    </button>
-                </div>
-            </div>
-        )
-    }
-
   return(
     <>
     <div className="PinnedForums">
@@ -75,7 +54,6 @@ function PinnedForums(){
         key={index} Title={forum.Forum_Name} Id={forum.Forum_ID}></PinnedForumCard>
       ))}
     </div>
-    {showLoginPopup && <PopUp onClose={() => setShowLoginPopup(false)} />}
     </>
   )
 }

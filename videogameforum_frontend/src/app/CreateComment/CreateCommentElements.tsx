@@ -2,13 +2,12 @@ import TopBar from "../TopBar/TopBar";
 import SideBar from "../SideBar/SideBar";
 
 export interface elements{
-    Comment_Date:string,
     Comment_Text: string,
     User:string
     UserProfilePictureURL: string
 }
 
-function CreateCommentElements({Comment_Date,Comment_Text,User,UserProfilePictureURL}:elements){
+function CreateCommentElements({Comment_Text,User,UserProfilePictureURL}:elements){
     const profileImageUrl = `http://localhost:8081${UserProfilePictureURL}`;
     return(
         <div className="CommentCard">
@@ -25,7 +24,6 @@ function CreateCommentElements({Comment_Date,Comment_Text,User,UserProfilePictur
                     
                     <span className="CommentAuthor">{User}</span>
                 </div>
-                <span className="CommentDate">{Comment_Date}</span>
             </div>
             <div className="CommentBody">
                 <p className="CommentText">{Comment_Text}</p>

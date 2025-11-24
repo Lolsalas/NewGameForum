@@ -40,7 +40,6 @@ var jwtsecret = []byte("SuperDuperSecretKey")
 func (h *handler) InsertUser(c *gin.Context) {
 	var new_user User
 	if err := c.ShouldBind(&new_user); err != nil {
-		// If binding fails, it's usually a Bad Request
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -372,7 +371,7 @@ func (h *handler) InsertComment(c *gin.Context) {
 		return
 	}
 
-	err = h.db_manager.InsertComment(FinalUsername, new_comment.Comment_Text, new_comment.Comment_Date, new_comment.Forum_ID, new_comment.Post_ID, FinalUserID)
+	err = h.db_manager.InsertComment(FinalUsername, new_comment.Comment_Text, new_comment.Forum_ID, new_comment.Post_ID, FinalUserID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

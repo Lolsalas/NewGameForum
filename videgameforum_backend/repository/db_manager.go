@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/Lolsalas/GameForum/models"
 	"golang.org/x/crypto/bcrypt"
@@ -31,7 +30,7 @@ var ErrInvalidCredentials = errors.New("credenciales de inicio de sesión invál
 func (db *DBManager) InsertNewUser(name string, password string, email string) error {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
-		// Maneja el error si el hashing falla (raro, pero posible)
+
 		return fmt.Errorf("fallo al hashear la contraseña: %w", err)
 	}
 	user := models.User{Username: name, Password: string(hashedPassword), Email: email}
@@ -107,9 +106,9 @@ func (db *DBManager) GetComments(Post_ID int) ([]models.Post_Comment, error) {
 	return Comments, nil
 }
 
-func (db *DBManager) InsertComment(user string, commenttext string, commentdate time.Time, forumid int, postid int, userid int) error {
+func (db *DBManager) InsertComment(user string, commenttext string, forumid int, postid int, userid int) error {
 
-	comments := models.Post_Comment{Username: user, Comment_Date: commentdate, Comment_Text: commenttext, Forum_ID: forumid, Post_ID: postid, Users_ID: userid}
+	comments := models.Post_Comment{Username: user, Comment_Text: commenttext, Forum_ID: forumid, Post_ID: postid, Users_ID: userid}
 	result := db.Orm.Create(&comments)
 	if result.Error != nil {
 		return result.Error
@@ -151,9 +150,9 @@ func (db *DBManager) PinForum(userid int, forumid int) error {
 	return err
 }
 
-func (db *DBManager) GetPinnedForums(user_id int) ([]models.Forum, error) {
+func (db *DBManager) GetPinnedForums(users_id int) ([]models.Forum, error) {
 	var user models.User
-	result := db.Orm.Preload("PinnedForums").First(&user, user_id)
+	result := db.Orm.Preload("PinnedForums").First(&user, users_id)
 	if result.Error != nil {
 		return nil, result.Error
 	}

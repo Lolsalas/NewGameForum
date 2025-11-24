@@ -75,8 +75,70 @@ const createPostLink = `/MainForum/${Forum_ID}/CreatePost`;
 
     fetchForum();
   }, [Forum_ID]);
+      const PopUp=({onClose}:{onClose: ()=>void})=>{
+        return(
+            <div className="PopUpCard">
+                <div className="PopUpInfo">
+                    <h2>ALTO!!!</h2>
+                    <span>Necesitas iniciar sesion para tener acceso a esta funcion.</span>
+                    <div className="PopUpLink">
+                        <Link href="/Login">Pulsa aqui para ir a la pantalla de inicio de sesion.</Link>
+                    </div>
+                    <button>
+                        <Link href='/'>
+                            Pulsa aqui para volver al menu principal
+                        </Link>
+                    </button>
+                </div>
+            </div>
+        )
+    }
+
+    const handlePinForum= async()=>{
+
+        const numericForumID = parseInt(Forum_ID, 10);
+        const authToken=localStorage.getItem("authToken")
+        if(!authToken){
+            console.error("Usuario no encontrado")
+            setShowLoginPopup(true)
+            return
+        } 
+
+        try{
+            const response = await fetch(`http://localhost:8081/forum/${Forum_ID}/pincomment`,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Authorization':`Bearer ${authToken}`,
+                },
+                    body: JSON.stringify({
+                    userid:"",
+                    forumid:numericForumID})
+            })
+            if(response.ok){
+                alert(`Foro pinneado.`)
+            }
+           else{
+                const errorData = await response.json();
+                console.error('Error al pinnear:', errorData);
+                if (response.status === 409) {
+                    alert(`Este foro ya está pinneado.`);
+        } 
+            else {
+                alert(`Error al pinnear el foro: ${errorData.error || response.statusText}`);
+            }
+    }
+        }
+        catch (err) {
+        console.error("Fetch falló:", err);
+      } finally {
+        setLoading(false);
+      [loading]}
+
+    }
 
     return(
+      <>
         <div>
             <TopBar></TopBar>
             <div className="MainForum">
@@ -92,6 +154,14 @@ const createPostLink = `/MainForum/${Forum_ID}/CreatePost`;
                     >
                         Create Post
                     </Button>
+                     <div className="main-actions">
+                    <button 
+                        className="PinThreadButton" 
+                        onClick={handlePinForum}
+                    >
+                        📌 Pin
+                    </button>
+                </div>  
                 </div>
                    {Forum?.Forum_Posts && Forum.Forum_Posts.length>0 ? (
 
@@ -126,6 +196,7 @@ const createPostLink = `/MainForum/${Forum_ID}/CreatePost`;
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

@@ -1,16 +1,16 @@
-/* --- 1. Variables de Modo Oscuro --- */
+
 :root {
-    /* Colores base */
-    --topbar-bg: #33363b; /* Gris oscuro para TopBar */
-    --sidebar-bg: #212121; /* Gris muy oscuro para SideBar */
-    --page-bg: #1c1c1e;   /* Fondo de página, casi negro */
-    --card-bg: #2c2f33;   /* Fondo de la tarjeta/lista de hilos */
+   
+    --topbar-bg: #33363b; 
+    --sidebar-bg: #212121; 
+    --page-bg: #1c1c1e;   
+    --card-bg: #2c2f33;   
     
-    /* Colores de contenido */
+   
     --primary-text: #f6f6f6;
     --secondary-text: #999999;
     --border-color: #3e4146;
-    --highlight-color: #ffc107; /* Amarillo/Dorado para resaltar */
+    --highlight-color: #ffc107; 
     --row-hover-bg: #33363b;
 }
 
@@ -21,33 +21,28 @@ body {
     color: var(--primary-text);
 }
 
-/* --- 2. Layout Principal (TopBar, SideBar y Contenido) --- */
 
-/* Contenedor principal debajo del TopBar */
 .MainForum {
     display: flex;
-    /* Necesitas margen superior si TopBar es fijo (position: fixed) */
-    /* Aquí se asume que TopBar tiene una altura de ~50px */
-    min-height: calc(100vh - 50px); /* Altura mínima de la vista */
+
+    min-height: calc(100vh - 50px);
 }
 
-/* El contenido del Foro (La tarjeta) */
+
 .MainForumCard {
-    flex-grow: 1; /* Ocupa el espacio restante horizontalmente */
+    flex-grow: 1; 
     padding: 20px;
     margin-left: 220px;
     margin-right: 20px;
     margin-top: 120px;
-    background-color: var(--card-bg); /* Fondo de la lista/tarjeta */
-    border-radius: 8px; /* Esquinas suaves */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra sutil */
-    min-width: 0; /* Asegura que no desborde en el flex container */
+    background-color: var(--card-bg);
+    border-radius: 8px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
+    min-width: 0; 
 }
 
 
-/* --- 3. Estilos de la Lista de Hilos (Basados en MainForumElements) --- */
 
-/* Estilos para el botón de Crear Post */
 .main-actions {
     display: flex;
     justify-content: flex-end; 
@@ -56,7 +51,7 @@ body {
 }
 
 
-/* --- Estilos de Encabezados (Header) --- */
+
 .forum-header {
     display: flex;
     padding: 10px 0;
@@ -67,14 +62,14 @@ body {
     border-bottom: 1px solid var(--border-color); 
 }
 
-/* --- Estilos de la Fila de Hilo (Thread Row) --- */
+
 .forum-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
     border-bottom: 1px solid var(--border-color); 
-    background-color: var(--card-bg); /* Mismo color que la tarjeta */
+    background-color: var(--card-bg); 
 }
 
 .forum-row:hover {
@@ -82,25 +77,23 @@ body {
     cursor: pointer;
 }
 
-/* --- Layout y Anchos de Columnas --- */
 
-/* Columna 1: Topic (Título) */
 .topic-cell {
     flex-basis: 60%;
     padding-right: 20px;
 }
-/* Columna 2: Author */
+
 .author-cell {
     flex-basis: 15%; 
     text-align: right;
 }
-/* Columna 3: Replies */
+
 .replies-cell {
     flex-basis: 15%; 
     text-align: right;
     font-size: 0.9em;
 }
-/* Columna 4: Activity (date) */
+
 .activity-cell {
     flex-basis: 10%;
     text-align: right;
@@ -108,13 +101,13 @@ body {
 }
 
 
-/* Asegurar alineación de encabezados con las celdas */
+
 .header-topic { flex-basis: 60%; padding-right: 20px; }
 .header-author { flex-basis: 15%; text-align: right; }
 .header-replies { flex-basis: 15%; text-align: right; }
 .header-activity { flex-basis: 10%; text-align: right; }
 
-/* --- Estilos de Contenido (Texto y Metadata) --- */
+
 
 .thread-title {
     margin: 0;
@@ -158,12 +151,12 @@ body {
 
 .actions-cell {
     display: flex;
-    justify-content: center; /* Centra el botón horizontalmente */
-    align-items: center; /* Centra el botón verticalmente */
+    justify-content: center; 
+    align-items: center; 
 }
 
 .PinThreadButton {
-    /* Estilos del botón Pin */
+
     background: transparent;
     border: 1px solid var(--highlight-color);
     color: var(--highlight-color);

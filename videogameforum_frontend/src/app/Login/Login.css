@@ -5,7 +5,7 @@
 }
 
 
-/* --- Variables de Modo Oscuro --- */
+
 :root {
     --page-bg: #1c1c1e;   
     --card-bg: #2c2f33;    
@@ -16,30 +16,29 @@
     --highlight-color: #ffc107; 
 }
 
-/* 1. Contenedor de la Página (Centrado Total) */
+
 .login-page-wrapper {
-    /* Centrado total en la vista */
+
     display: flex;
-    flex-direction: column; /* Apila TopBar y el contenido */
-    align-items: center; /* Centra horizontalmente el LoginCard */
+    flex-direction: column; 
+    align-items: center; 
     min-height: 100vh;
     background-color: var(--page-bg);
-    /* padding-top: 50px; si la TopBar es fixed, necesitas esto */
+
 }
 
-/* 2. Tarjeta del Formulario */
+
 .LoginCard {
     width: 100%;
     max-width: 380px; 
-    padding: 30px 40px; /* Más padding en horizontal */
-    margin-top: 120px; /* Separación de la TopBar */
+    padding: 30px 40px; 
+    margin-top: 120px; 
     background-color: var(--card-bg);
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
     border-top: 5px solid var(--highlight-color); 
 }
 
-/* Título */
 .LoginCard .login-title {
     color: var(--primary-text);
     font-size: 1.8em;
@@ -48,35 +47,35 @@
     font-weight: 600;
 }
 
-/* 3. Estilo del Campo de Entrada con Ícono (LoginInput) */
+
 .LoginInput {
-    display: flex; /* Para alinear el ícono y el input */
+    display: flex; 
     align-items: center;
     margin-bottom: 20px;
     background-color: var(--input-bg);
     border-radius: 4px;
-    padding: 0 10px; /* Padding dentro de la caja de input */
+    padding: 0 10px; 
     border: 1px solid var(--border-color);
     transition: border-color 0.2s;
 }
 
 .LoginInput:focus-within {
-    border-color: var(--highlight-color); /* Resalta el borde al enfocar */
+    border-color: var(--highlight-color); 
 }
 
 .LoginInput .Icon {
-    /* Estilo del ícono (👤 o 🔒) */
+
     color: var(--secondary-text);
     font-size: 1.2em;
     padding-right: 10px;
-    user-select: none; /* Evita selección del emoji */
+    user-select: none; 
 }
 
 .LoginInput input {
-    /* El campo de texto en sí */
+
     flex-grow: 1;
-    padding: 12px 0; /* Solo padding vertical */
-    background: none; /* Fondo transparente para usar el fondo del LoginInput */
+    padding: 12px 0;
+    background: none; 
     color: var(--primary-text);
     border: none;
     outline: none;
@@ -87,15 +86,15 @@
     color: var(--secondary-text);
 }
 
-/* 4. Botón de Enviar */
+
 .LoginButton {
     width: 100%;
     padding: 12px;
     margin-top: 15px;
     border: none;
     border-radius: 4px;
-    background-color: var(--highlight-color); /* Botón amarillo/dorado */
-    color: #33363b; /* Texto oscuro en el botón claro */
+    background-color: var(--highlight-color); 
+    color: #33363b; 
     font-weight: 700;
     font-size: 1.1em;
     cursor: pointer;
@@ -103,10 +102,10 @@
 }
 
 .LoginButton:hover {
-    background-color: #e0ac00; /* Un tono más oscuro al pasar el ratón */
+    background-color: #e0ac00; 
 }
 
-/* 5. Enlace de Registro */
+
 .LoginSignUp {
     display: block;
     text-align: center;

@@ -43,14 +43,14 @@ function Login(){
 
     return(
         
-       <div className="login-page-wrapper"> {/* Nueva clase para centrado total */}
+       <div className="login-page-wrapper"> 
         <TopBar></TopBar>
         
-        {/* Eliminamos <div className="Layout"> y <SideBar> para centrar */}
+ 
         <div className="LoginCard">
           <SideBar></SideBar>
-            <form onSubmit={handleLogin} className="login-form"> {/* Añadimos clase form */}
-                <h2 className="login-title">Login</h2> {/* Añadimos clase título */}
+            <form onSubmit={handleLogin} className="login-form">
+                <h2 className="login-title">Login</h2> 
                 
                 <div className="LoginInput form-group">
                     <label className="Icon" htmlFor="email">👤</label>

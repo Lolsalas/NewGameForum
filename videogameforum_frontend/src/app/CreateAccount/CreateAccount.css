@@ -15,16 +15,16 @@
   justify-content: center;
 }
 
-/* 1. Layout de Contenedor Principal (Dos Columnas) */
+
 .CreateAccount.Layout { 
     display: flex;
     min-height: calc(100vh - var(--topbar-height));
     overflow-x: hidden;
 }
 
-/* 2. Tarjeta/Área del Formulario (Contenido principal) */
+
 .CreateAccountCard.content-card {
-    /* CRUCIAL: Mueve el contenido para dejar espacio a la SideBar */
+
     margin-left: 200px; 
     flex-grow: 1; 
     flex-wrap: wrap;
@@ -34,12 +34,12 @@
     margin-top: 80px;
 }
 
-/* 3. Estilos del Formulario de Registro (La Tarjeta Flotante) */
+
 .account-form {
     display: flex;
     flex-direction: column;
-    max-width: 500px; /* Tamaño de tarjeta */
-    margin: 40px auto; /* Centra la tarjeta horizontalmente dentro del área de contenido */
+    max-width: 500px; 
+    margin: 40px auto; 
     padding: 30px 40px;
     background-color: var(--card-bg);
     border-radius: 8px;
@@ -47,7 +47,7 @@
     border-top: 5px solid var(--highlight-color);
 }
 
-/* Título de la Sección */
+
 .account-form .section-title {
     color: var(--primary-text);
     font-size: 1.8em;
@@ -58,7 +58,7 @@
     text-align: center;
 }
 
-/* 4. Estilos de Campos (Reutilizan clases) */
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -71,7 +71,7 @@
 }
 
 .LoginInput.create-input-box {
-    /* La caja que contiene el input (para enfocar) */
+
     display: flex;
     align-items: center;
     background-color: var(--input-bg);
@@ -85,7 +85,7 @@
 }
 
 .LoginInput input.login-input {
-    /* El input de texto */
+
     flex-grow: 1;
     padding: 12px 0; 
     background: none; 
@@ -95,9 +95,9 @@
     font-size: 1em;
 }
 
-/* 5. Botón de Enviar */
+
 .CreateAccountButton.post-submit-button {
-    /* Reutiliza el estilo de botón dorado */
+
     width: 100%;
     padding: 12px;
     margin-top: 15px;
@@ -115,7 +115,7 @@
     background-color: #e0ac00;
 }
 
-/* 6. Enlace a Login */
+
 .link-text {
     text-align: center;
     margin-top: 25px;

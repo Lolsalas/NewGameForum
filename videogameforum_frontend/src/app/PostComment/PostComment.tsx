@@ -6,6 +6,7 @@ import { useEffect,useState } from "react";
 import { useParams } from "next/navigation";
 import { ReactFormState } from "react-dom/client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 
@@ -16,6 +17,7 @@ function PostComments()
     const [comment,setComments]=useState("")
     const{Post_ID,Forum_ID}=useParams<{Post_ID:string,Forum_ID:string}>();
     const [showLoginPopup, setShowLoginPopup] = useState(false);
+    const router =useRouter()
  
 
     const handlePost=async(e:React.FormEvent)=>{
@@ -39,6 +41,10 @@ function PostComments()
                 Comment_Date: '2025-11-17T00:00:00Z',
             })
         })
+        const data=await res.json()
+        if (res.ok){
+            router.push(`/MainForum/${Forum_ID}/${Post_ID}`)
+        }
 
     }
 

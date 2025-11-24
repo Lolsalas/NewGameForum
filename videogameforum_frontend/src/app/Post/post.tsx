@@ -15,6 +15,7 @@ interface User{
   Users_id:number;
   Username:string;
   ProfilePictureURL:string;
+  Title:string
 }
 
 interface Post {
@@ -38,8 +39,7 @@ function Post()
 
     useEffect(() => {
     const fetchPost = async () => {
-      console.log("ID recibido desde la URL:", Post_ID); // Depuración
-
+      console.log("ID recibido desde la URL:", Post_ID); 
       if (!Post_ID) {
         console.error("No se recibió un ID válido");
         setLoading(false);
@@ -49,7 +49,7 @@ function Post()
       try {
         const res = await fetch(`http://localhost:8081/forum/${Forum_ID}/${Post_ID}`);
         const data = await res.json();
-        console.log("Respuesta del backend:", data); // Depuración
+        console.log("Respuesta del backend:", data); 
 
         if (res.ok) {
           if (data.post) {
@@ -76,7 +76,7 @@ function Post()
     <div>
         <div className='Post'>
             <div className="PostCard">
-                <PostElement text={Post?.Post_Text ?? "Desconocido"} date={Post?.Post_Date ?? "Desconocido"} title={Post?.Post_Title ?? "Desconocido"} forum_id={Post?.Forum_ID ?? -1} author={Post?.User.Username??"Desconocido"} post_id={Post?.Post_ID?? -1} authorProfilePictureURL={Post?.User.ProfilePictureURL??"Desconocido"}></PostElement>
+                <PostElement text={Post?.Post_Text ?? "Desconocido"} date={Post?.Post_Date ?? "Desconocido"} title={Post?.Post_Title ?? "Desconocido"} forum_id={Post?.Forum_ID ?? -1} author={Post?.User.Username??"Desconocido"} post_id={Post?.Post_ID?? -1} authorProfilePictureURL={Post?.User.ProfilePictureURL??"Desconocido"} authorTitle={Post?.User.Title??"Desconocido"}></PostElement>
             </div>
         </div>
     </div>

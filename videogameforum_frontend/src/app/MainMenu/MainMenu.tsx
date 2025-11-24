@@ -3,6 +3,7 @@
 import MainMenuCard from "../MainMenuCard/MainMenuCard";
 import { useEffect,useState } from "react";
 import './MainMenu.css'
+import '../PopUp/PopUp.css'
 
 interface Forums{
     Forum_Name:  string
@@ -21,7 +22,7 @@ function MainMenu()
       try {
         const res = await fetch(`http://localhost:8081/forum`);
         const data:Forums[]=await res.json();
-        console.log("Respuesta del backend:", data); // Depuración
+        console.log("Respuesta del backend:", data);
 
             if (res.ok) {
                 setForum(data)
