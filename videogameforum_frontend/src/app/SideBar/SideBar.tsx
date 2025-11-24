@@ -31,6 +31,11 @@ function SideBar(){
         <ListItemText primary="Create a Forum"/>
       </ListItemButton>
       </Link>
+      <Link href='/UpdateProfile'>
+      <ListItemButton>
+        <ListItemText primary="Edit Profile" />
+      </ListItemButton>
+      </Link>
     </List>
   )
   return(

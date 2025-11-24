@@ -1,11 +1,13 @@
 package repository
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"time"
 
 	"github.com/Lolsalas/GameForum/models"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -24,8 +26,15 @@ func New(url string) *DBManager {
 	return &DBManager{db}
 }
 
+var ErrInvalidCredentials = errors.New("credenciales de inicio de sesión inválidas")
+
 func (db *DBManager) InsertNewUser(name string, password string, email string) error {
-	user := models.User{Username: name, Password: password, Email: email}
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		// Maneja el error si el hashing falla (raro, pero posible)
+		return fmt.Errorf("fallo al hashear la contraseña: %w", err)
+	}
+	user := models.User{Username: name, Password: string(hashedPassword), Email: email}
 	result := db.Orm.Create(&user)
 	if result.Error != nil {
 		return result.Error
@@ -53,12 +62,20 @@ func (db *DBManager) GetUsers() ([]models.User, error) {
 
 func (db *DBManager) Login(email, password string) (*models.User, error) {
 	var user models.User
-	result := db.Orm.Where("email = ? AND password = ?", email, password).First(&user)
+	result := db.Orm.Where("email = ?", email).First(&user)
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
-			return nil, nil
+			return nil, ErrInvalidCredentials
 		}
 		return nil, result.Error
+	}
+
+	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	if err != nil {
+		if errors.Is(err, bcrypt.ErrMismatchedHashAndPassword) {
+			return nil, ErrInvalidCredentials
+		}
+		return nil, err
 	}
 	return &user, nil
 }

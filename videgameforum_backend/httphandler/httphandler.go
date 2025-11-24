@@ -1,6 +1,7 @@
 package httphandler
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -121,6 +122,10 @@ func (h *handler) Login(c *gin.Context) {
 
 	user, err := h.db_manager.Login(input.Email, input.Password)
 	if err != nil {
+		if errors.Is(err, repository.ErrInvalidCredentials) {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Email o contraseña incorrecta"})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
