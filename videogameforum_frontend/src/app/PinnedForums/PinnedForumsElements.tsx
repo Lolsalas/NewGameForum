@@ -15,9 +15,6 @@ return (
     <div className='pinned-forum-wrapper'>
         <div className='pinned-forum-layout'>
         </div>
-        <div className='pinned-forum-name'>
-            <h3>Your Pinned Forums</h3>
-        </div>
         <Link href={`/MainForum/${Id}`} className="pinned-forum-card-link">
             <div className="-pinned-forum-card">
                 <div className="pinned-forum-details">

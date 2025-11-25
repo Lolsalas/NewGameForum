@@ -49,6 +49,9 @@ function PinnedForums(){
   return(
     <>
     <div className="PinnedForums">
+        <div className='pinnedforum-name'>
+            <h3>Your Pinned Forums</h3>
+        </div>
       {pinnedForum.map((forum,index)=>(
         <PinnedForumCard
         key={index} Title={forum.Forum_Name} Id={forum.Forum_ID}></PinnedForumCard>

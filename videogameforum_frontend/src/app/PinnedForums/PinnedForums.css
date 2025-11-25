@@ -100,5 +100,13 @@ body {
     padding-bottom: 5px;
 }
 
-
+.pinnedforum-name{
+    margin-top: 120px;
+    margin-left: 220px;
+    font-size: 1.3em;
+    color: #f0f0f0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
 

@@ -200,6 +200,7 @@ const createPostLink = `/MainForum/${Forum_ID}/CreatePost`;
                 </div>
             </div>
         </div>
+        {showLoginPopup && <PopUp onClose={() => setShowLoginPopup(false)} />}
         </>
     )
 }
